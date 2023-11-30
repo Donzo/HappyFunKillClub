@@ -1,0 +1,41 @@
+{
+	"name": "Kira Musashi",
+	"dir": "/cards/characters/kira-musashi/",
+	"cardNumber": "3",
+	"cardType": "Character Card",
+	"class": "Samurai",
+	"rarity": "common",
+	"health": "60",
+	"energy": "4",
+	"aim": "55",
+	"speed": "75",
+	"defend": "30",
+	"luck": "10",
+	"action1": [{
+		"name": "Five Ringed Fury",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "45",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Crimson Cleave",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Koi Leap",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

@@ -1,0 +1,41 @@
+{
+	"name": "Freyja Snowbinder",
+	"dir": "/cards/characters/freyja-snowbinder/",
+	"cardNumber": "5",
+	"cardType": "Character Card",
+	"class": "Ice Wizard",
+	"rarity": "common",
+	"health": "50",
+	"energy": "7",
+	"aim": "70",
+	"speed": "50",
+	"defend": "25",
+	"luck": "15",
+	"action1": [{
+		"name": "Glacial Shard",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "40",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Frostweave",
+		"type": "Drain",
+		"trait": "speed",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Winter's Embrace",
+		"type": "Boost",
+		"trait": "defend",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

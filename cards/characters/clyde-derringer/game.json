@@ -1,0 +1,41 @@
+{
+	"name": "Clyde Derringer",
+	"dir": "/cards/characters/clyde-derringer/",
+	"cardNumber": "2",
+	"cardType": "Character Card",
+	"class": "Gun Slinger",
+	"rarity": "common",
+	"health": "50",
+	"energy": "4",
+	"aim": "80",
+	"speed": "70",
+	"defend": "30",
+	"luck": "10",
+	"action1": [{
+		"name": "Dead Man's Hands",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "60",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Quick Draw",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"action3": [{
+		"name": "Dead-Eye",
+		"type": "Boost",
+		"trait": "aim",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

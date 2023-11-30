@@ -1,0 +1,41 @@
+{
+	"name": "Edmund Arrowfly",
+	"dir": "/cards/characters/edmund-arrowfly/",
+	"cardNumber": "4",
+	"cardType": "Character Card",
+	"class": "Archer",
+	"rarity": "common",
+	"health": "60",
+	"energy": "6",
+	"aim": "80",
+	"speed": "40",
+	"defend": "15",
+	"luck": "15",
+	"action1": [{
+		"name": "Triple Shot",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "50",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Quick Shot",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"action3": [{
+		"name": "The Eagle's Eye",
+		"type": "Boost",
+		"trait": "aim",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

@@ -1,0 +1,41 @@
+{
+	"name": "Sir Nibblet Crossfield",
+	"dir": "/cards/characters/sir-nibblet-crossfield/",
+	"cardNumber": "1",
+	"cardType": "Character Card",
+	"class": "Mouse Knight",
+	"rarity": "common",
+	"health": "30",
+	"energy": "5",
+	"aim": "60",
+	"speed": "85",
+	"defend": "20",
+	"luck": "20",
+	"action1": [{
+		"name": "Holy Cross",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "70",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Squeek Slash",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Nibble",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}
