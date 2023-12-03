@@ -453,6 +453,7 @@
 			ig.game.spawnEntity( EntityDeck, 0, 0, { num: 3 });
 			ig.game.spawnEntity( EntityDeck, 0, 0, { num: 4 });
 			ig.game.spawnEntity( EntityMatchmake, 0, 0);
+			ig.game.spawnEntity( EntityMintredcoins, 0, 0);
 			ig.game.spawnEntity( EntityPlaycpu, 0, 0);
 		}
 		function setAlert(txt, txtSize, myNum){

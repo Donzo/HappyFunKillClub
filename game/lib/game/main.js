@@ -17,6 +17,7 @@ ig.module(
 	'game.entities.buttons.endturn',
 	'game.entities.buttons.leavemm',
 	'game.entities.buttons.matchmake',
+	'game.entities.buttons.mintredcoins',
 	'game.entities.buttons.ok',
 	'game.entities.buttons.playcpu',
 	'game.entities.buttons.playcharacter',
@@ -57,6 +58,8 @@ MyGame = ig.Game.extend({
 	buttonMuteSmall: new ig.Image( 'media/buttons-and-logos/button-mute-small.png' ),
 	buttonMutedSmall: new ig.Image( 'media/buttons-and-logos/button-muted-small.png' ),
 	
+	titleScreenTxt: "Welcome to the Happy Fun Kill Club!",
+	
 	muteGame: false,
 	musicLevel: 1,
 	playersWaitingNum: 0,
@@ -94,6 +97,7 @@ MyGame = ig.Game.extend({
 	rangedHitSound: new ig.Sound('media/sounds/ranged-hit.*'),
 	deadGuyActingSound: new ig.Sound('media/sounds/dead-guy-acting.*'),
 	killCharacterSound: new ig.Sound('media/sounds/kill-character.*'),
+	mintRedCoinsSound: new ig.Sound('media/sounds/mint-redcoins.*'),
 	
 	CCIDCounter: 0,
 	MUIDCounter: 0,
@@ -587,6 +591,12 @@ MyGame = ig.Game.extend({
 		}
 		else{
 			this.dFonts.setTxtSizeHUD(ctx, .75);
+		}
+	},
+	playMintRedCoinsSound: function(){
+		if (!ig.game.muteGame){	
+			this.mintRedCoinsSound.volume = .5;
+			this.mintRedCoinsSound.play();
 		}
 	},
 	playSwordSound: function(){
@@ -1614,7 +1624,7 @@ MyGame = ig.Game.extend({
 		this.drawABox(tAdjust, ig.system.width - tAdjust, tAdjust, ig.system.height - tAdjust, tFrameSize, "#343434", true, "#000000");
 		 //Welcome Menu
 		//Title Variables
-		var tTxt = "Welcome to the Happy Fun Kill Club!";  //Welcome Menu
+		  //Welcome Menu
 		if (this.menuScreenNum == 2){
 			/*if (ig.game.playersWaitingNum == 0){
 				tTxt = `Entering into the Waiting Room`;
@@ -1638,7 +1648,7 @@ MyGame = ig.Game.extend({
 		ig.game.tWid = tWid;
 		
 		//Draw Title
-		this.drawMenuTitle(tTxt, tx, ty, tWid);
+		this.drawMenuTitle(ig.game.titleScreenTxt, tx, ty, tWid);
 		
 		//drawButton: function(x, y, width, height, txt, txtSize){
 		var bWidth = ig.system.width * .2;
@@ -1682,12 +1692,32 @@ MyGame = ig.Game.extend({
 		var myTxt = "Red Coins: " + redCoinNum;
 		var myTxtWidth = ctx.measureText(myTxt).width;
 		
-		var rcdX = ig.system.width - myTxtWidth - 110;
-		var rcdY = ig.system.height * .4;
+		ig.game.mintRedCoinButHeight = ig.game.thinLineHeight + 30;
+		var rcdX = ig.game.deckButton1X ;
+		var rcdY = ig.game.deckButtonY - ig.game.mintRedCoinButHeight - 80;
+		
 
 		this.dFonts.changeFont(ctx, 3);
 		ctx.fillStyle = "#33FF33";
 		ctx.fillText(myTxt, rcdX, rcdY);	
+		
+		ig.game.mintRedCoinButX = rcdX;
+		ig.game.mintRedCoinButY = rcdY + ig.game.thinLineHeight;
+		ig.game.mintRedCoinButWidth = ig.game.deckButtonWidth * 3.66;
+		
+		
+		var butTxt = "Mint Redcoins"
+		
+		if (!redCoinNum){
+			this.drawButton(ig.game.mintRedCoinButX, ig.game.mintRedCoinButY, ig.game.mintRedCoinButWidth, ig.game.mintRedCoinButHeight, butTxt, 3, "#000000", "#343434", "#343434", 3)		
+		}
+		else if (this.mintRedCoinButHover){
+			this.drawButton(ig.game.mintRedCoinButX, ig.game.mintRedCoinButY, ig.game.mintRedCoinButWidth, ig.game.mintRedCoinButHeight, butTxt, 3, "#33FF33", "#000000", "#343434", 3)		
+		}
+		else{
+			this.drawButton(ig.game.mintRedCoinButX, ig.game.mintRedCoinButY, ig.game.mintRedCoinButWidth, ig.game.mintRedCoinButHeight, butTxt, 3, "#000000", "#33FF33", "#33FF33", 3)		
+		}
+		
 		
 	},
 	drawMenuTitle: function(txt, tx, ty, tWid){

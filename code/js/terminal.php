@@ -352,6 +352,9 @@
 					myButtons = playGameButton + buildDeckButton + buyCardsButton + logOutButton;
 				}
 			}
+			else{
+				myButtons = connectWalletButton + playGameButton + buildDeckButton + buyCardsButton;
+			}
 			document.getElementById("cpanel-buttons-div").innerHTML = myButtons;
 			setTimeout(focusOnTerminal, 1000);
 		}
