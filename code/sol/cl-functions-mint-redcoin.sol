@@ -20,7 +20,7 @@ contract RedCoinCheck is FunctionsClient, ConfirmedOwner {
 	bytes public s_lastError;
 	uint32 gasLimit = 300000; //Callback gas limit
 	bytes32 donID = 0x66756e2d6176616c616e6368652d66756a692d31000000000000000000000000; //donID - Avalanche Fuji
-	address private redCoinContractAddress; //SET IN CONSTRUCTOR, REMEMBER TO CHANGE IF DEPLOYING NEW ORE TOKEN
+	address private redCoinContractAddress; //SET IN CONSTRUCTOR, REMEMBER TO CHANGE IF DEPLOYING NEW REDCOIN TOKEN
 	address public mintersAddress;
 	string public redCoins;
 	uint256 public redCoinsToMint;
