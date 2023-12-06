@@ -1,0 +1,60 @@
+{
+    "name": "Lorien Spectrum | Happy Fun Kill Club Series 1",
+    "description": "Common Rainbow Wizard Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/lorien-spectrum.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Lorien Spectrum"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "19"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 45
+        },
+        {
+            "trait_type": "Energy",
+            "value": 6
+        },
+        {
+            "trait_type": "Aim",
+            "value": 75
+        },
+        {
+            "trait_type": "Speed",
+            "value": 55
+        },
+        {
+            "trait_type": "Defend",
+            "value": 20
+        },
+        {
+            "trait_type": "Luck",
+            "value": 25
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Prismatic Ray is a ranged attack that costs 3 energy to use and can cause a maximum of 40 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Spectrum Heal is a supporting action that costs 2 energy to use and can heal this character or an ally by up to 30health points if it is effective."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Chromatic Dash is a ranged supporting action that costs 2 energy to use and can increase this character or an ally's speed by 20 points if it is effective."
+        }
+    ]
+}

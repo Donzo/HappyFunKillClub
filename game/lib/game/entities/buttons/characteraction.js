@@ -62,7 +62,19 @@ EntityCharacteraction=ig.Entity.extend({
 			var msg = `Characters cannot act on the round in which they are deployed.`;
 			ig.game.spawnAlertBox(msg, 5, 1); //txt, txtSize, num
 		}
+		
+		
+		
 		this.parent();
+	},
+	killMeIfCharacterActed(){
+		var dboVar = ig.game.selectedPieceDBOVar;
+		var actorID = `ch${ig.game[dboVar].character_id}`;
+		var actorEnt = ig.game.getEntityByName(actorID);
+		if (actorEnt.hasActed){
+			console.log('This character has already taken an action. Kill the action button.');
+			this.kill();
+		}
 	},
 	setSizeAndLoc: function(){
 

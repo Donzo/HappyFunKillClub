@@ -1,0 +1,41 @@
+{
+	"name": "Azuron The Starweaver",
+	"dir": "/cards/characters/azuron-the-starweaver/",
+	"cardNumber": "26",
+	"cardType": "Character Card",
+	"class": "Blue Wizard",
+	"rarity": "Rare",
+	"health": "50",
+	"energy": "6",
+	"aim": "70",
+	"speed": "50",
+	"defend": "20",
+	"luck": "30",
+	"action1": [{
+		"name": "Celestial Surge",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "65",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Gravity Flood",
+		"type": "R Drain",
+		"trait": "speed",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Astral Bolt",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "25",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "Float",
+		"visionStatus": "none"
+	}]	
+}

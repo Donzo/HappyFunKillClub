@@ -1,0 +1,60 @@
+{
+    "name": "Ragnar Vane | Happy Fun Kill Club Series 1",
+    "description": "Common Viking Warrior Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/ragnar-vane.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Ragnar Vane"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "12"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 70
+        },
+        {
+            "trait_type": "Energy",
+            "value": 5
+        },
+        {
+            "trait_type": "Aim",
+            "value": 50
+        },
+        {
+            "trait_type": "Speed",
+            "value": 50
+        },
+        {
+            "trait_type": "Defend",
+            "value": 30
+        },
+        {
+            "trait_type": "Luck",
+            "value": 10
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Skull Splitter is a melee attack that costs 4 energy to use and causes a maximum of 70 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Berserker Rush is a melee attack that costs 2 energy to use and causes a maximum of 30 damage."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Axe Throw is a ranged attack that costs 1 energy to use and can cause a maximum of 15 damage."
+        }
+    ]
+}

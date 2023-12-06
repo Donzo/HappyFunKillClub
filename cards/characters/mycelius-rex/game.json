@@ -1,0 +1,41 @@
+{
+	"name": "Mycelius Rex",
+	"dir": "/cards/characters/mycelius-rex/",
+	"cardNumber": "17",
+	"cardType": "Character Card",
+	"class": "Mushroom King",
+	"rarity": "Common",
+	"health": "55",
+	"energy": "6",
+	"aim": "45",
+	"speed": "35",
+	"defend": "40",
+	"luck": "15",
+	"action1": [{
+		"name": "Spore Galore",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "80",
+		"cost": "5"
+	}],
+	"action2": [{
+		"name": "Fungal Tonic",
+		"type": "R Support",
+		"trait": "health",
+		"effect": "25",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Mycelium Shield",
+		"type": "R Support",
+		"trait": "defend",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

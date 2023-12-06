@@ -256,7 +256,8 @@
 					stopPollingRoundUpdate();
 					stopPollingRoundStatus();
 					console.log(data.message);
-					stopPollingRoundUpdate()
+					stopPollingRoundUpdate();
+					checkForGameEnd();
 				}
 			})
 			.catch(error => {
@@ -316,13 +317,15 @@
 			return onBoardCharactersCount;
 		}
 		function makeTheActionStatement(actorName, actionName, targetName, trait, effect, result, actionType, targetID, actorID){
+			console.log(`1: actorName:${actorName}, actionName: ${actionName}, targetName: ${targetName}, trait: ${trait}, effect: ${effect}, result: ${result}, actionType: ${actionType}, targetID: ${targetID}, actorID: ${actorID}`)
+			
+			//1: actorName:Tukkuk Nanook, actionName: Spear Blizzard, targetName: Sir Nibblet Crossfield, trait: health, effect: 0, result: , actionType: Ranged, targetID: 3213, actorID: 3216
 			ig.game.actionReportCount++;
 			var actionStatement = "";
 			var actionStatement1 = `${actorName} used ${actionName}`;
 			var actionStatementMissed1 = `${actorName} attempted to use ${actionName}`;
 			var targetStatement1 = `on ${targetName}`;
 			var wasWounded = "was wounded";
-			
 			var targetHealth = getHealthByCharacterId(targetID);
 			
 			var actorAlreadyDead = "was dead and could not take action";
@@ -331,19 +334,17 @@
 			
 			var actorLoc = getLocationByCharacterId(actorID);
 			var targetLoc = getLocationByCharacterId(targetID);
-			
 			ig.game.clearTileColors();
-			
 			var piece = false;
 			var piecePosX = false;
 			var piecePosY = false;
-			
-			var myTargetID = targetID.trim();
-			var targetName = "ch" + myTargetID;
-			targetName = targetName.toString();
+			//var myTargetID = targetID.trim();
+			var targetVarName = "ch" + targetID;
+			targetVarName = targetVarName.replace(/\s/g, "");
+			targetNameStr = targetVarName.toString();
 
-			if (ig.game.getEntityByName(targetName)){
-				piece = ig.game.getEntityByName(targetName);
+			if (ig.game.getEntityByName(targetNameStr)){
+				piece = ig.game.getEntityByName(targetNameStr);
 				piecePosX = piece.pos.x;
 				piecePosY = piece.pos.y;
 			}
@@ -389,8 +390,8 @@
 				ig.game.colorTile(targetLoc, 'target');
 				effect = "Killed";
 				if (targetID){
-					if (ig.game.getEntityByName(targetName)){
-						var Char = ig.game.getEntityByName(targetName);
+					if (ig.game.getEntityByName(targetNameStr)){
+						var Char = ig.game.getEntityByName(targetNameStr);
 						Char.killMe();
 					}
 				}
@@ -434,11 +435,11 @@
 				}
 			}
 			//Try to kill again:
-			if (targetName){
+			if (targetID){
 				var targetHealth = getHealthByCharacterId(targetID);
 				//Kill Target Who Has No Health
-				if (ig.game.getEntityByName(targetName) && parseInt(targetHealth) <= 0){
-					var Char = ig.game.getEntityByName(targetName);
+				if (ig.game.getEntityByName(targetNameStr) && parseInt(targetHealth) <= 0){
+					var Char = ig.game.getEntityByName(targetNameStr);
 					Char.killMe();
 				}
 			}
@@ -453,7 +454,6 @@
 		}
 		
 		function updateActionReporting(data){
-			
 			var onBoardChars= returnOnBoardCharacters();
 					
 			if (onBoardChars < 3){
@@ -483,9 +483,8 @@
 			if (data.success && data.simpleActionSummaries.length > 0){
 				//Handle the first action immediately
 				if (data.simpleActionSummaries.length > 0){
-					
 					var theStatement = makeTheActionStatement(data.actionSummaries[0].actorName, data.actionSummaries[0].actionName, data.actionSummaries[0].targetName, data.actionSummaries[0].trait, data.simpleActionSummaries[0].effect, data.actionSummaries[0].result, data.actionSummaries[0].actionType, data.simpleActionSummaries[0].targetId, data.simpleActionSummaries[0].actorId);
-					
+					console.log(theStatement);
 					ig.game.centerCameraOnCharacterByID(data.simpleActionSummaries[0].actorId); //Center Camera on Actor
 					ig.game.moveReportingTxt1 = theStatement;
 					ig.game.lastMRTXT1 = theStatement;
@@ -771,10 +770,10 @@
 				const result = await response.json();
 
 				if (result.success){
-					//console.log('Deck updated successfully in session!');
+					console.log('Deck updated successfully in session!');
 				}
 				else{
-					//console.error('Failed to update deck in session:', result.message);
+					console.error('Failed to update deck in session:', result.message);
 				}
 			} 
 			catch (err){

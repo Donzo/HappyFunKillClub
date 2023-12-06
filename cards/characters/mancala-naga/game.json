@@ -1,0 +1,41 @@
+{
+	"name": "Mancala Naga",
+	"dir": "/cards/characters/mancala-naga/",
+	"cardNumber": "27",
+	"cardType": "Character Card",
+	"class": "Serpentine Enchantress",
+	"rarity": "Common",
+	"health": "45",
+	"energy": "6",
+	"aim": "75",
+	"speed": "55",
+	"defend": "20",
+	"luck": "25",
+	"action1": [{
+		"name": "Anaconda Squeeze",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "60",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Snake Charm",
+		"type": "R Support",
+		"trait": "luck",
+		"effect": "15",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Viper Strike",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "Nightvision"
+	}]	
+}

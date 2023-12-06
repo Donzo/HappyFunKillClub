@@ -913,8 +913,16 @@ MyGame = ig.Game.extend({
 		//Draw character buttons (need to go here for two column test.)
 		if (ig.game.displayCardView != 2 && ig.game.lookingAtMyCharacter){
 			
-			if (ig.game[ig.game.displayCardDBO].hasDeployed){		
-				this.drawCharActionButton(imgX, boxB, boxWidth, boxHeight, true);
+			if (ig.game[ig.game.displayCardDBO].hasDeployed){
+				var dboVar = ig.game.selectedPieceDBOVar;
+				var actorID = `ch${ig.game[dboVar].character_id}`;
+				var actorEnt = ig.game.getEntityByName(actorID);
+				if (actorEnt.hasActed){
+					this.drawCharActionButton(imgX, boxB, boxWidth, boxHeight, false);
+				}
+				else{
+					this.drawCharActionButton(imgX, boxB, boxWidth, boxHeight, true);
+				}
 			}
 			else{
 				this.drawCharActionButton(imgX, boxB, boxWidth, boxHeight, false);
@@ -1247,10 +1255,14 @@ MyGame = ig.Game.extend({
 	},
 	highlightAdjacentTiles: function(tileNumber, whatWay){
 		const adjacentTiles = this.getAdjacentTiles(tileNumber);
-	
-		adjacentTiles.forEach(tile => {
-			this.colorTile(tile, whatWay);
-		}); 
+		if (adjacentTiles){
+			adjacentTiles.forEach(tile => {
+				this.colorTile(tile, whatWay);
+			});
+		}
+		else{
+			console.log('adjacentTiles is ' + adjacentTiles);
+		} 
 	},
 	highlightAdjacentEnemyTiles: function(playerNumber, playerTile, whatWay){
 		const adjacentEnemyLocations = this.getAdjacentEnemyLocations(playerNumber, playerTile);

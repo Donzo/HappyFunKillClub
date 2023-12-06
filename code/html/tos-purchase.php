@@ -60,20 +60,19 @@
 	</div>
 	<div id='purchase-packs-slider-unit' class='hide'>
 		<!-- Amount to Buy Text -->
-		<div class='center-text amountToBuyText'>Buy <span id='amountOfPacks'>1</span> <span id='congegateNounPack'>Pack</span> for <span id='costOfPacks'>.1</span> ETH.</div>
+		<div class='center-text amountToBuyText'>Buy <span id='amountOfPacks'>1</span> <span id='congegateNounPack'>Pack</span> for <span id='costOfPacks'>.1</span> AVAX.</div>
 		<!-- Amount to Slider -->
 		<div class="slidecontainer">
 			1 Pack &nbsp; <input type="range" min="1" max="10" value="1" class="slider" id="slidePacksToBuy" oninput="adjustPackAmount();"> &nbsp; 10 Packs
 		</div>
 		<div class='center-text'>Adjust this slider to buy more packs.</div>
-	</div>
-	
-	<div id='loading-wheel-div' class='hide'>
-		<div>
-			<img src='/images/loading-wheel.gif'/>
-		</div>
-		<div id='waiting-msg'>
-			Buying Now...
+		<div id='loading-wheel-div' class='hide'>
+			<div>
+				<img src='/images/loading-wheel-02.gif'/>
+			</div>
+			<div id='waiting-msg'>
+				Buying Now...
+			</div>
 		</div>
 	</div>
 	<div id='confirmation-message' class='hide'>
@@ -83,12 +82,26 @@
 	<div id='buy-button-div'>
 		<button id='buy-pack-button' class='disabledbutton' disabled>AGREE TO TOS TO BUY PACK</button>
 	</div>
-	<div id='users-packs-message' class='center-text users-packs-message'>
+	<div id='users-packs-message-wrapper'>
+		<div id='users-packs-message' class='center-text users-packs-message'>
+		
+		</div>
+		<div id='loading-wheel-div-02' class='hide'>
+			<div>
+				<img src='/images/loading-wheel-02.gif'/>
+			</div>
+			<div id='waiting-msg-02'>
+				&nbsp;
+			</div>
+		</div>
+		<div id="pulled-cards-div" class="my-cards">
+		</div>
 	</div>
-	<div id='open-packs-div'>
-		<button id='open-pack-button' class='disabledbutton' disabled>AGREE TO TOS TO OPEN PACK</button>
-	</div>
-	<div id="pulled-cards-div" class="my-cards">
+	
+	<div id='open-packs-wrapper'>
+		<div id='open-packs-div'>
+			<button id='open-pack-button' class='disabledbutton' disabled>AGREE TO TOS TO OPEN PACK</button>
+		</div>
 	</div>
 	<div id="play-game-button-div" class='hide'>
 		<button id='play-game-button' class='button' onclick = 'playGame()'>Play the Game Now</button>

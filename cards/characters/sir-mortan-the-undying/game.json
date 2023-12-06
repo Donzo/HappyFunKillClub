@@ -1,0 +1,41 @@
+{
+	"name": "Sir Mortan The Undying",
+	"dir": "/cards/characters/sir-mortan-the-undying/",
+	"cardNumber": "14",
+	"cardType": "Character Card",
+	"class": "Zombie Knight",
+	"rarity": "Common",
+	"health": "80",
+	"energy": "3",
+	"aim": "50",
+	"speed": "40",
+	"defend": "50",
+	"luck": "5",
+	"action1": [{
+		"name": "Death March",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "50",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Pestilent Guard",
+		"type": "Boost",
+		"trait": "defend",
+		"effect": "10",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Decaying Slash",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "20",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "Infrared"
+	}]	
+}

@@ -4,7 +4,7 @@
 	"cardNumber": "4",
 	"cardType": "Character Card",
 	"class": "Archer",
-	"rarity": "common",
+	"rarity": "Common",
 	"health": "60",
 	"energy": "6",
 	"aim": "80",

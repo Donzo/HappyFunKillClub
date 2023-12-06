@@ -12,7 +12,10 @@
 				</div>
 				<div class="terminalBody" id="terminalBody-02">
 					<h2 class="termH2">DECK BUILDER</h2>
-					
+					<div id="sync-message"></div>
+					<div id='loading-wheel-div-02' class='hide'>
+						<img src='/images/loading-wheel-02.gif'/>
+					</div>
 					<div class="dbRow" id="saved-decks">
 						<div id="saved-decks-col">
 							<h2 class="termH2">SAVED DECKS</h3>
@@ -56,6 +59,9 @@
 		</div>
 		<div class="db-button">
 			<button id="saveDeck" onclick="saveDeck()" disabled>Save Deck</button>
+		</div>
+		<div class="db-button">
+			<button id="saveDeck" onclick="synchronizeMyDeck()">Synchronize Purchased Cards</button>
 		</div>
 	</div>
 	<div id="cardDisplayFrame">

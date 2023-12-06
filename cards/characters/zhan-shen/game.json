@@ -1,0 +1,41 @@
+{
+	"name": "Zhan Shen",
+	"dir": "/cards/characters/zhan-shen/",
+	"cardNumber": "15",
+	"cardType": "Character Card",
+	"class": "Warrior Monk",
+	"rarity": "Common",
+	"health": "60",
+	"energy": "5",
+	"aim": "70",
+	"speed": "70",
+	"defend": "15",
+	"luck": "10",
+	"action1": [{
+		"name": "Dragon Palm Strike",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "40",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Snake Bite Strike",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "25",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Tranquil Lotus",
+		"type": "Boost",
+		"trait": "health",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"status": [{
+		"healthStatus": "Regeneration",
+		"hs_int": "5",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

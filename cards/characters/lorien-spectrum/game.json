@@ -1,0 +1,41 @@
+{
+	"name": "Lorien Spectrum",
+	"dir": "/cards/characters/lorien-spectrum/",
+	"cardNumber": "19",
+	"cardType": "Character Card",
+	"class": "Rainbow Wizard",
+	"rarity": "Common",
+	"health": "45",
+	"energy": "6",
+	"aim": "75",
+	"speed": "55",
+	"defend": "20",
+	"luck": "25",
+	"action1": [{
+		"name": "Prismatic Ray",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "40",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Spectrum Heal",
+		"type": "R Support",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Chromatic Dash",
+		"type": "R Support",
+		"trait": "speed",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "float",
+		"visionStatus": "infrared"
+	}]	
+}

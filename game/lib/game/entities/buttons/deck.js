@@ -47,7 +47,6 @@ EntityDeck=ig.Entity.extend({
 				this.clickSound.volume = .25; 
 				this.clickSound.play();
 			}
-			
 			if (this.num == 1){
 				updateDeckInSession(mySavedDeck1Flat);
 				selectedDeck = 1;

@@ -73,6 +73,9 @@ EntityConfirm=ig.Entity.extend({
 				else if (this.num == 7){ //End turn
 					endTurn();
 				}
+				else if (this.num == 8){ //Get TestNet AVAX
+					openNewTab("https://faucets.chain.link/fuji");
+				}
 				else{
 					alert('yes ' + this.num);
 				}
@@ -94,6 +97,10 @@ EntityConfirm=ig.Entity.extend({
 				else if (this.num == 4){ //Get Signature
 					var msg = `You must switch to the ${preferredNetwork1} to play this game.`;
 					ig.game.spawnAlertBox(msg, 5, 4); //txt, txtSize, num
+				}
+				else if (this.num == 8){ //Get Signature
+					var msg = `Ok that's fine but you won't be able to mint RedCoin then.`;
+					ig.game.spawnAlertBox(msg, 5, 8); //txt, txtSize, num
 				}
 				//Do Nothing if Else
 			}

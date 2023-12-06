@@ -1,0 +1,60 @@
+{
+    "name": "Sir Mortan The Undying | Happy Fun Kill Club Series 1",
+    "description": "Common Zombie Knight Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/sir-mortan-the-undying.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Sir Mortan The Undying"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "14"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 80
+        },
+        {
+            "trait_type": "Energy",
+            "value": 3
+        },
+        {
+            "trait_type": "Aim",
+            "value": 50
+        },
+        {
+            "trait_type": "Speed",
+            "value": 40
+        },
+        {
+            "trait_type": "Defend",
+            "value": 50
+        },
+        {
+            "trait_type": "Luck",
+            "value": 5
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Death March is a melee attack that costs 3 energy to use and causes a maximum of 50 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Pestilent Guard is a boosting action that costs 2 energy to use and increases this character's defend by 10 points."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Decaying Slash is a melee attack that costs 1 energy to use and causes a maximum of 20 damage."
+        }
+    ]
+}

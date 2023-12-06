@@ -1,0 +1,60 @@
+{
+    "name": "Agent Mason | Happy Fun Kill Club Series 1",
+    "description": "Common Federal Agent Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/agent-mason/card.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Agent Mason"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "6"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 50
+        },
+        {
+            "trait_type": "Energy",
+            "value": 5
+        },
+        {
+            "trait_type": "Aim",
+            "value": 70
+        },
+        {
+            "trait_type": "Speed",
+            "value": 50
+        },
+        {
+            "trait_type": "Defend",
+            "value": 40
+        },
+        {
+            "trait_type": "Luck",
+            "value": 10
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Fire Wall is a ranged attack that costs 3 energy to use and can cause a maximum of 40 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Cloak is a supporting action that costs 2 energy to use and can increase this character or an ally's defend by 20 points."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Dagger is a melee attack that costs 1 energy to use and causes a maximum of 15 damage."
+        }
+    ]
+}

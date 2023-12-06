@@ -1,0 +1,41 @@
+{
+	"name": "Frankie Stubbs",
+	"dir": "/cards/characters/frankie-stubbs/",
+	"cardNumber": "20",
+	"cardType": "Character Card",
+	"class": "Mob Boss",
+	"rarity": "Common",
+	"health": "55",
+	"energy": "5",
+	"aim": "70",
+	"speed": "50",
+	"defend": "10",
+	"luck": "35",
+	"action1": [{
+		"name": "Double Barrel Peril",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "65",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Tommy Spray",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Intimidation",
+		"type": "R Drain",
+		"trait": "luck",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

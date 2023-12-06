@@ -1,0 +1,41 @@
+{
+	"name": "Xyrex Nebulae",
+	"dir": "/cards/characters/xyrex-nebulae/",
+	"cardNumber": "7",
+	"cardType": "Character Card",
+	"class": "Alien Assassin",
+	"rarity": "Common",
+	"health": "40",
+	"energy": "7",
+	"aim": "70",
+	"speed": "70",
+	"defend": "10",
+	"luck": "20",
+	"action1": [{
+		"name": "Phase Strike",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "40",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Quantum Snare",
+		"type": "R Drain",
+		"trait": "speed",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Void Shuriken",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "Infrared"
+	}]	
+}

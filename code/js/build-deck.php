@@ -78,7 +78,8 @@
 			dispEle = document.getElementById("cardDisplay");
 			
 			var selectedDir = directory;
-			dispEle.innerHTML = "<a href='" + selectedDir + "card.jpg' target='_blank'><img src='" + selectedDir + "card.jpg'/></a>";
+			dispEle.innerHTML = `<a href="${selectedDir}card.jpg" target="_blank"><img src="${selectedDir}card.jpg"/></a>`;
+			//"<a href='" + selectedDir + "card.jpg' target='_blank'><img src='" + selectedDir + "card.jpg'/></a>";
 		}
 		function describeCard(name, type, dir){ //Add information about selected card
 			if (type == "character"){
@@ -89,7 +90,8 @@
 			var cdType = document.getElementById("cdType");
 			cdType.innerHTML = type;
 			var cdLink = document.getElementById("cdLink");
-			cdLink.innerHTML = "<a href='"+ dir +"card.jpg' target='_blank'>View Card</a>";
+			cdLink.innerHTML = `<a href="${dir}card.jpg" target="_blank">View Card</a>`;
+			//"<a href='"+ dir +"card.jpg' target='_blank'>View Card</a>";
 		}
 
 		function setCardChoices(deck){ //Iterates through the set-card-data.php (js) object to find PLAYER'S cards - creates links that use that data to select and display cards
@@ -104,8 +106,9 @@
 					var cardDir = deck[i].dir;
 					var cardQuan = deck[i].Quantity;
 					var cardType = deck[i].type;
-					var myFunction = "selectCard(\'" + cardId + "\', \'" + cardDir + "\', \'" + cardName + "\', \'" + cardType + "\')";
-					characterCards.innerHTML += '<li id="li' + cardId + '"><a id="card' + cardId + '" class="cardPick" onclick="' + myFunction +'" >' + cardName + ' (<span id="q' + cardId + '">' + cardQuan + '</span>)</a></li>';
+					var escapedCardName = cardName.replace(/'/g, "\\'");//Handle names with single quotes
+					var myFunction = `selectCard('${cardId}', '${cardDir}', '${escapedCardName}', '${cardType}')`;
+					characterCards.innerHTML += `<li id="li${cardId}"><a id="card${cardId}" class="cardPick" onclick="${myFunction}" >${cardName} (<span id="q${cardId}">${cardQuan}</span>)</a></li>`;
 				}
 			}
 			else{
@@ -184,8 +187,9 @@
 			selectedCardNum++;
 			var menuOfPicks = document.getElementById('character-cards-indeck');
 			var idOfPick = 'cc' + selectedCardNum;
-			var myFunction = "viewCard(\'" + idOfPick + "\', \'" + selCardDir + "\', \'" + selCardName + "\', \'" + selCardType + "\')";
-			var newNode = '<li><a id="' + idOfPick + '" onclick="' + myFunction + '">' + lastCardSelectedName + '</a></li>';
+			var escapedCardName = selCardName.replace(/'/g, "\\'");//Handle names with single quotes
+			var myFunction = `viewCard('${idOfPick}', '${selCardDir}', '${escapedCardName}', '${selCardType}')`;
+			var newNode = `<li><a id="${idOfPick}" onclick="${myFunction}">${lastCardSelectedName}</a></li>`;
 
 			
 			if (selectedCardNum == 1){
@@ -268,8 +272,8 @@
 			document.getElementById("saved-character-cards-list").innerHTML = "";
 			
 			for (let i = 1; i <= l; i++) {
-				var myFunction = "viewCard(\'" + deck[i].Id  + "\', \'" + deck[i].dir + "\', \'" + deck[i].name + "\', \'" + deck[i].type + "\')";
-				var newNode = '<li><a id="' + deck[i].Id  + '" onclick="' + myFunction + '">' + deck[i].name  + '</a></li>';
+				var myFunction = `viewCard('${deck[i].Id}', '${deck[i].dir}', '${deck[i].name}', '${deck[i].type}')`;
+				var newNode = `<li><a id="${deck[i].Id}" onclick="${myFunction}">${deck[i].name}</a></li>`;
 				document.getElementById("saved-character-cards-list").innerHTML +=  newNode;
 			}
 		}

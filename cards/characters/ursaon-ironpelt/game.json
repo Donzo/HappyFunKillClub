@@ -1,0 +1,41 @@
+{
+	"name": "Ursaon Ironpelt",
+	"dir": "/cards/characters/ursaon-ironpelt/",
+	"cardNumber": "24",
+	"cardType": "Character Card",
+	"class": "Bear Warrior",
+	"rarity": "Uncommon",
+	"health": "90",
+	"energy": "4",
+	"aim": "50",
+	"speed": "50",
+	"defend": "40",
+	"luck": "10",
+	"action1": [{
+		"name": "Furry Flury Fury",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "65",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Brawl and Maul",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Swipe",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

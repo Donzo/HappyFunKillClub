@@ -1,0 +1,41 @@
+{
+	"name": "Necrocleric Malachor",
+	"dir": "/cards/characters/necrocleric-malachor/",
+	"cardNumber": "8",
+	"cardType": "Character Card",
+	"class": "Dark Priest",
+	"rarity": "Common",
+	"health": "50",
+	"energy": "6",
+	"aim": "60",
+	"speed": "75",
+	"defend": "10",
+	"luck": "20",
+	"action1": [{
+		"name": "Soul Siphon",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "50",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Veil of Darkness",
+		"type": "R Drain",
+		"trait": "aim",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Agonizing Touch",
+		"type": "Melee",
+		"trait": "aim",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

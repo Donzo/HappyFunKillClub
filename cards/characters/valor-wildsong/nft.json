@@ -1,0 +1,60 @@
+{
+    "name": "Valor Wildsong | Happy Fun Kill Club Series 1",
+    "description": "Uncommon Banshee Warrior Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/valor-wildsong.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Valor Wildsong"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "23"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Uncommon"
+        },
+        {
+            "trait_type": "Health",
+            "value": 60
+        },
+        {
+            "trait_type": "Energy",
+            "value": 5
+        },
+        {
+            "trait_type": "Aim",
+            "value": 50
+        },
+        {
+            "trait_type": "Speed",
+            "value": 60
+        },
+        {
+            "trait_type": "Defend",
+            "value": 20
+        },
+        {
+            "trait_type": "Luck",
+            "value": 30
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Spirit Fury is a ranged attack that costs 4 energy to use and can cause a maximum of 60 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Lament the Fallen is a supporting action that costs 2 energy to use and can heal this character or an ally by up to 25health points if it is effective."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Wailing Shriek is a ranged attack that costs 2 energy to use and can cause a maximum of 15 damage."
+        }
+    ]
+}

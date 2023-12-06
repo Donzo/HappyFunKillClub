@@ -1,0 +1,60 @@
+{
+    "name": "Necrocleric Malachor | Happy Fun Kill Club Series 1",
+    "description": "Common Dark Priest Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/necrocleric-malachor.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Necrocleric Malachor"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "8"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 50
+        },
+        {
+            "trait_type": "Energy",
+            "value": 6
+        },
+        {
+            "trait_type": "Aim",
+            "value": 60
+        },
+        {
+            "trait_type": "Speed",
+            "value": 75
+        },
+        {
+            "trait_type": "Defend",
+            "value": 10
+        },
+        {
+            "trait_type": "Luck",
+            "value": 20
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Soul Siphon is a ranged attack that costs 3 energy to use and can cause a maximum of 50 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Veil of Darkness is a ranged draining action that costs 2 energy to use and reduces an enemy's aim by 30 points if it is effective."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Agonizing Touch is a melee attack that costs 1 energy to use and causes a maximum of 15 damage."
+        }
+    ]
+}

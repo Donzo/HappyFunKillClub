@@ -1,0 +1,41 @@
+{
+	"name": "Valor Wildsong",
+	"dir": "/cards/characters/valor-wildsong/",
+	"cardNumber": "23",
+	"cardType": "Character Card",
+	"class": "Banshee Warrior",
+	"rarity": "Uncommon",
+	"health": "60",
+	"energy": "5",
+	"aim": "50",
+	"speed": "60",
+	"defend": "20",
+	"luck": "30",
+	"action1": [{
+		"name": "Spirit Fury",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "60",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Lament the Fallen",
+		"type": "R Support",
+		"trait": "health",
+		"effect": "25",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Wailing Shriek",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "15",
+		"cost": "2"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "Float",
+		"visionStatus": "Infrared"
+	}]	
+}

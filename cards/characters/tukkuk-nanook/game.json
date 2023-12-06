@@ -1,0 +1,41 @@
+{
+	"name": "Tukkuk Nanook",
+	"dir": "/cards/characters/tukkuk-nanook/",
+	"cardNumber": "16",
+	"cardType": "Character Card",
+	"class": "Inuit Chieftain",
+	"rarity": "Common",
+	"health": "70",
+	"energy": "4",
+	"aim": "55",
+	"speed": "40",
+	"defend": "30",
+	"luck": "25",
+	"action1": [{
+		"name": "Spear Blizzard",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "45",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Polar Focus",
+		"type": "Boost",
+		"trait": "aim",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Northstar Slash",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "20",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

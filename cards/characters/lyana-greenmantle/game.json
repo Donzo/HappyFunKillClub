@@ -1,0 +1,41 @@
+{
+	"name": "Lyana Greenmantle",
+	"dir": "/cards/characters/lyana-greenmantle/",
+	"cardNumber": "9",
+	"cardType": "Character Card",
+	"class": "Forest Druid",
+	"rarity": "Common",
+	"health": "45",
+	"energy": "5",
+	"aim": "50",
+	"speed": "60",
+	"defend": "20",
+	"luck": "30",
+	"action1": [{
+		"name": "Healing Rain",
+		"type": "R Support",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action2": [{
+		"name": "Nettle Needles",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Thorn Whip",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

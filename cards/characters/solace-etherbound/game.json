@@ -1,0 +1,41 @@
+{
+	"name": "Solace Etherbound",
+	"dir": "/cards/characters/solace-etherbound/",
+	"cardNumber": "10",
+	"cardType": "Character Card",
+	"class": "Wraith",
+	"rarity": "Common",
+	"health": "50",
+	"energy": "6",
+	"aim": "60",
+	"speed": "80",
+	"defend": "15",
+	"luck": "15",
+	"action1": [{
+		"name": "Soul Reaver",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "80",
+		"cost": "5"
+	}],
+	"action2": [{
+		"name": "Ghastly Grasp",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "40",
+		"cost": "3"
+	}],
+	"action3": [{
+		"name": "Will-O-Whisper",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "Float",
+		"visionStatus": "Nightvision"
+	}]	
+}

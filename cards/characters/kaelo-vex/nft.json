@@ -1,0 +1,60 @@
+{
+    "name": "Kaelo Vex | Happy Fun Kill Club Series 1",
+    "description": "Uncommon Alien Thief Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/kaelo-vex.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Kaelo Vex"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "22"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Uncommon"
+        },
+        {
+            "trait_type": "Health",
+            "value": 50
+        },
+        {
+            "trait_type": "Energy",
+            "value": 6
+        },
+        {
+            "trait_type": "Aim",
+            "value": 60
+        },
+        {
+            "trait_type": "Speed",
+            "value": 75
+        },
+        {
+            "trait_type": "Defend",
+            "value": 10
+        },
+        {
+            "trait_type": "Luck",
+            "value": 20
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Double Cross is a melee attack that costs 2 energy to use and causes a maximum of 30 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Starlight Sprint is a boosting action that costs 2 energy to use and increases this character's speed by 25 points."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Holo Doppleganger is a ranged draining action that costs 2 energy to use and reduces an enemy's aim by 25 points if it is effective."
+        }
+    ]
+}

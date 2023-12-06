@@ -1,0 +1,41 @@
+{
+	"name": "Agent Mason",
+	"dir": "/cards/characters/agent-mason/",
+	"cardNumber": "6",
+	"cardType": "Character Card",
+	"class": "Federal Agent",
+	"rarity": "Common",
+	"health": "50",
+	"energy": "5",
+	"aim": "70",
+	"speed": "50",
+	"defend": "40",
+	"luck": "10",
+	"action1": [{
+		"name": "Fire Wall",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "40",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Cloak",
+		"type": "Support",
+		"trait": "defend",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Dagger",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

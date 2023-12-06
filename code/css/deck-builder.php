@@ -93,6 +93,10 @@
 			border-color: #FF69B4;
 			color: #000000;
 		}
+		#sync-message{
+			margin-bottom: .5em;
+			text-align: center;
+		}
 		.savedDeck{
 			border-color: #33FF33;
 			border-style: solid;

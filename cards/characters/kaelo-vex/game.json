@@ -1,0 +1,41 @@
+{
+	"name": "Kaelo Vex",
+	"dir": "/cards/characters/kaelo-vex/",
+	"cardNumber": "22",
+	"cardType": "Character Card",
+	"class": "Alien Thief",
+	"rarity": "Uncommon",
+	"health": "50",
+	"energy": "6",
+	"aim": "60",
+	"speed": "75",
+	"defend": "10",
+	"luck": "20",
+	"action1": [{
+		"name": "Double Cross",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action2": [{
+		"name": "Starlight Sprint",
+		"type": "Boost",
+		"trait": "speed",
+		"effect": "25",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Holo Doppleganger",
+		"type": "R Drain",
+		"trait": "aim",
+		"effect": "25",
+		"cost": "2"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "Infrared"
+	}]	
+}

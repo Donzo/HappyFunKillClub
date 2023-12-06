@@ -1,0 +1,60 @@
+{
+    "name": "Frankie Stubbs | Happy Fun Kill Club Series 1",
+    "description": "Common Mob Boss Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/frankie-stubbs.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Frankie Stubbs"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "20"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 55
+        },
+        {
+            "trait_type": "Energy",
+            "value": 5
+        },
+        {
+            "trait_type": "Aim",
+            "value": 70
+        },
+        {
+            "trait_type": "Speed",
+            "value": 50
+        },
+        {
+            "trait_type": "Defend",
+            "value": 10
+        },
+        {
+            "trait_type": "Luck",
+            "value": 35
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Double Barrel Peril is a melee attack that costs 4 energy to use and causes a maximum of 65 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Tommy Spray is a ranged attack that costs 2 energy to use and can cause a maximum of 30 damage."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Intimidation is a ranged draining action that costs 1 energy to use and reduces an enemy's luck by 10 points if it is effective."
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+	"name": "Thump The Ripper",
+	"dir": "/cards/characters/thump-the-ripper/",
+	"cardNumber": "25",
+	"cardType": "Character Card",
+	"class": "Murderous Bunny",
+	"rarity": "Rare",
+	"health": "40",
+	"energy": "6",
+	"aim": "65",
+	"speed": "80",
+	"defend": "20",
+	"luck": "30",
+	"action1": [{
+		"name": "Bounce and Trounce",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "50",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Speed Junky",
+		"type": "Boost",
+		"trait": "speed",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Carrot Shank",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "20",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

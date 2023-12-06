@@ -112,25 +112,6 @@
 		    }
 	</script>
 	
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	
-	<meta name="description" content="Welcome to the Happy Fun Kill Club! Let the games begin.">
-	<meta property="og:url" content="0000000000PUTURLHERE9999999999999999990000000000PUTURLHERE999999999999999999" />
-	<meta property="og:title" content="Happy Fun Kill Club | Game" />
-	<meta property="og:description" content="Welcome to the Happy Fun Kill Club! Let the games begin." /> 
-	<meta property="og:image" content="0000000000PUTURLHERE9999999999999999990000000000PUTURLHERE999999999999999999" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
-
-	<meta name="twitter:image" content="https://ereadinggames.com/images/idiom-unicorn-tw.jpg">
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:creator" content="@donzomortini">
-	<meta name="twitter:title" content="Happy Fun Kill Club | Game">
-	<meta name="twitter:description" content="Welcome to the Happy Fun Kill Club! Let the games begin.">
-	
 </head>
 <body>
 	<canvas id="canvas"><font color="#FEFF04"><center>You are using an outdated browser. Why don't you download <a href='https://www.google.com/chrome'>Chrome</a>?</center></font></canvas>
@@ -139,6 +120,7 @@
 	<?php 
 		require_once $_SERVER['DOCUMENT_ROOT'] . "/code/js/set-card-data.php";
 		require_once $_SERVER['DOCUMENT_ROOT'] . "/code/js/signin.php";
+		require_once $_SERVER['DOCUMENT_ROOT'] . "/code/js/abi1.php";
 	?>
 	<!-- ABI FOR WEB 3 STUFF -->
 	<?php //require_once($_SERVER['DOCUMENT_ROOT'] . '/code/js/abi1.php'); ?>

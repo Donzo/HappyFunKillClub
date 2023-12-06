@@ -1,0 +1,41 @@
+{
+	"name": "Callow Skyshriek",
+	"dir": "/cards/characters/callow-skyshriek/",
+	"cardNumber": "13",
+	"cardType": "Character Card",
+	"class": "Harpy Warrior",
+	"rarity": "Common",
+	"health": "55",
+	"energy": "5",
+	"aim": "65",
+	"speed": "70",
+	"defend": "20",
+	"luck": "15",
+	"action1": [{
+		"name": "Tempest Dive",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "50",
+		"cost": "3"
+	}],
+	"action2": [{
+		"name": "Bladed Whirlwind",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "25",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Talon Slash",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "10",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "Flight",
+		"visionStatus": "none"
+	}]	
+}

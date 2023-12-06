@@ -1,0 +1,41 @@
+{
+	"name": "Ragnar Vane",
+	"dir": "/cards/characters/ragnar-vane/",
+	"cardNumber": "12",
+	"cardType": "Character Card",
+	"class": "Viking Warrior",
+	"rarity": "Common",
+	"health": "70",
+	"energy": "5",
+	"aim": "50",
+	"speed": "50",
+	"defend": "30",
+	"luck": "10",
+	"action1": [{
+		"name": "Skull Splitter",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "70",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Berserker Rush",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "30",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Axe Throw",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

@@ -1,0 +1,60 @@
+{
+    "name": "Sir Nibblet Crossfield | Happy Fun Kill Club Series 1",
+    "description": "Common Mouse Knight Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/sir-nibblet-crossfield.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Sir Nibblet Crossfield"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "1"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 35
+        },
+        {
+            "trait_type": "Energy",
+            "value": 5
+        },
+        {
+            "trait_type": "Aim",
+            "value": 60
+        },
+        {
+            "trait_type": "Speed",
+            "value": 85
+        },
+        {
+            "trait_type": "Defend",
+            "value": 20
+        },
+        {
+            "trait_type": "Luck",
+            "value": 20
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Holy Cross is a melee attack that costs 4 energy to use and causes a maximum of 70 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Squeek Slash is a melee attack that costs 2 energy to use and causes a maximum of 30 damage."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Nibble is a melee attack that costs 1 energy to use and causes a maximum of 10 damage."
+        }
+    ]
+}

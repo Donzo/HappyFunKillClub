@@ -44,10 +44,29 @@
 		#open-packs-div{
 			margin-bottom: 5em;
 		}
-		.amountToBuyText, .users-packs-message{
+		.amountToBuyText{
 			font-size: 1.5em;
 			margin-bottom: .5em;
+			color: #FFD700;
 		}
+		#users-packs-message-wrapper{
+			color: #FF6600;
+			background: #000000;
+			border-style: solid;
+			border:#343434;
+			border-width: medium;
+			margin: 1em;
+			padding: 2em;
+		}
+		#users-packs-message{
+			color: #33FF33;
+			font-size: 2em;
+			line-height: 2em;
+		}
+		#waiting-msg{
+			color: #33FF33;
+		}
+		
 		.sales-copy{
 			margin-top: 2em;
 			padding-top: 2em;
@@ -90,14 +109,19 @@
  			cursor: pointer;
 		}
 		#purchase-packs-slider-unit{
+			margin: 1em;
+			padding: 2em;
+			background: #000000;
 			margin-top: 4em;
 		}
-		#loading-wheel-div{
+		
+		#loading-wheel-div, #loading-wheel-div-02{
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 			font-size:2em;
+			margin:1em;
 		}
 		.hide{
 			display: none !important;

@@ -1,0 +1,41 @@
+{
+	"name": "John 'Riptide' McTavish",
+	"dir": "/cards/characters/john-riptide-mctavish/",
+	"cardNumber": "21",
+	"cardType": "Character Card",
+	"class": "Navy SEAL Commander",
+	"rarity": "Common",
+	"health": "60",
+	"energy": "5",
+	"aim": "70",
+	"speed": "60",
+	"defend": "20",
+	"luck": "15",
+	"action1": [{
+		"name": "Sniper's Mark",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "60",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Silent Takedown",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "45",
+		"cost": "3"
+	}],
+	"action3": [{
+		"name": "Tactical Maneuver",
+		"type": "Support",
+		"trait": "speed",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "Nightvision"
+	}]	
+}

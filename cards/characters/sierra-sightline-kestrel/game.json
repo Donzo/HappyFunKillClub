@@ -1,0 +1,41 @@
+{
+	"name": "Sierra 'Sightline' Kestrel",
+	"dir": "/cards/characters/sierra-sightline-kestrel/",
+	"cardNumber": "11",
+	"cardType": "Character Card",
+	"class": "Sniper",
+	"rarity": "Common",
+	"health": "40",
+	"energy": "6",
+	"aim": "85",
+	"speed": "40",
+	"defend": "15",
+	"luck": "30",
+	"action1": [{
+		"name": "Headshot",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "65",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Evasive Maneuver",
+		"type": "Boost",
+		"trait": "speed",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Cover Fire",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}

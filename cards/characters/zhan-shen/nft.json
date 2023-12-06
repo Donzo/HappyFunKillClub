@@ -1,0 +1,60 @@
+{
+    "name": "Zhan Shen | Happy Fun Kill Club Series 1",
+    "description": "Common Warrior Monk Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/zhan-shen.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Zhan Shen"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "15"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 60
+        },
+        {
+            "trait_type": "Energy",
+            "value": 5
+        },
+        {
+            "trait_type": "Aim",
+            "value": 70
+        },
+        {
+            "trait_type": "Speed",
+            "value": 70
+        },
+        {
+            "trait_type": "Defend",
+            "value": 15
+        },
+        {
+            "trait_type": "Luck",
+            "value": 10
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Dragon Palm Strike is a melee attack that costs 3 energy to use and causes a maximum of 40 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Snake Bite Strike is a melee attack that costs 2 energy to use and causes a maximum of 25 damage."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Tranquil Lotus is a boosting action that costs 2 energy to use and increases this character's health by 20 points."
+        }
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "name": "Mancala Naga | Happy Fun Kill Club Series 1",
+    "description": "Common Serpentine Enchantress Character Card for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/characters/mancala-naga.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Mancala Naga"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "27"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Character Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Health",
+            "value": 45
+        },
+        {
+            "trait_type": "Energy",
+            "value": 6
+        },
+        {
+            "trait_type": "Aim",
+            "value": 75
+        },
+        {
+            "trait_type": "Speed",
+            "value": 55
+        },
+        {
+            "trait_type": "Defend",
+            "value": 20
+        },
+        {
+            "trait_type": "Luck",
+            "value": 25
+        },
+        {
+            "trait_type": "Action 1",
+            "value": "Anaconda Squeeze is a melee attack that costs 4 energy to use and causes a maximum of 60 damage."
+        },
+        {
+            "trait_type": "Action 2",
+            "value": "Snake Charm is a ranged supporting action that costs 2 energy to use and can increase this character or an ally's luck by 15 points if it is effective."
+        },
+        {
+            "trait_type": "Action 3",
+            "value": "Viper Strike is a melee attack that costs 1 energy to use and causes a maximum of 15 damage."
+        }
+    ]
+}

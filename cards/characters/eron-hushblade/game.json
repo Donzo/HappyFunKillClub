@@ -1,0 +1,41 @@
+{
+	"name": "Eron Hushblade",
+	"dir": "/cards/characters/eron-hushblade/",
+	"cardNumber": "18",
+	"cardType": "Character Card",
+	"class": "Rogue",
+	"rarity": "Common",
+	"health": "50",
+	"energy": "5",
+	"aim": "65",
+	"speed": "70",
+	"defend": "25",
+	"luck": "20",
+	"action1": [{
+		"name": "Back Stab",
+		"type": "Melee",
+		"trait": "health",
+		"effect": "60",
+		"cost": "4"
+	}],
+	"action2": [{
+		"name": "Smoke Bomb",
+		"type": "R Support",
+		"trait": "defend",
+		"effect": "20",
+		"cost": "2"
+	}],
+	"action3": [{
+		"name": "Dart Lob",
+		"type": "Ranged",
+		"trait": "health",
+		"effect": "15",
+		"cost": "1"
+	}],
+	"status": [{
+		"healthStatus": "none",
+		"hs_int": "0",
+		"terrainStatus": "none",
+		"visionStatus": "none"
+	}]	
+}
