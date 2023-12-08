@@ -18,7 +18,7 @@
 	
 	
 	
-	$web3 = new Web3(new HttpProvider(new HttpRequestManager("https://avalanche-fuji.infura.io/v3/yourkeyhere")));
+	$web3 = new Web3(new HttpProvider(new HttpRequestManager("https://avalanche-fuji.infura.io/v3/your-endpoint")));
 	$eth = $web3->eth;
 	
 	use Web3\Contract;

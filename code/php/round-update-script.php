@@ -72,8 +72,15 @@
 		}
 		else{
 			//Match player session round number to current round
-			$_SESSION['roundNumber'] = $currentRound;
-			$responseMessage = 'Continuing current round';
+			if ($_SESSION['roundNumber'] < $currentRound && $gameData['status'] == 'IN_PROGRESS'){
+				$responseMessage = 'Other player advanced round';
+				$_SESSION['roundNumber'] = $currentRound;
+				$_SESSION['nextRoundEnd'] = $nextRoundEnd;
+			}
+			else{
+				$responseMessage = 'Continuing current round';	
+			}
+			
 		}
 
 	

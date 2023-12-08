@@ -1,0 +1,32 @@
+{
+    "name": "Level 2 Bulletproof Vest | Happy Fun Kill Club Series 1",
+    "description": "Gold level body armor for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/items/level-2-bulletproof-vest/card.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Level 2 Bulletproof Vest"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "151"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Item Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Gold"
+        },
+        {
+            "trait_type": "Defend",
+            "value": 15
+        },
+        {
+            "trait_type": "Item Description",
+            "value": "Standard issue level 2 bulletproof vest that is protective against medium sized weaponry and sized for comfort."
+        }
+    ]
+}

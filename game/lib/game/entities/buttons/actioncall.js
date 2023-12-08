@@ -126,7 +126,8 @@ EntityActioncall=ig.Entity.extend({
 						case "Support":
 							// Do Support things
 							ig.game.highlightAdjacentTiles(ig.game.charCurLoc, "supportMeleeRange");
-							ig.game.highlightAdjacentEnemyTiles(pNum, ig.game.charCurLoc, "supportMeleeTarget");
+							ig.game.highlightAdjacentEnemyTiles(eNum, ig.game.charCurLoc, "boost"); //Selecting ENUM so this will target player characters.
+							ig.game.highlightAdjacentEnemyTiles(pNum, ig.game.charCurLoc, "invalidMove");
 							break;
 						case "R Support":
 							// Do Ranged Support things

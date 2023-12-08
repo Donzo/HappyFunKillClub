@@ -196,14 +196,19 @@
 				
 				ig.game.lastRoundActionSummaries = data.simpleActionSummaries;
 				ig.game.lastRoundActionSummariesLong = data.actionSummaries;
-
-				if (data.success){
+				//console.log(data.message );
+				if (data.message == "New round started" ||  data.message == "Other player advanced round"){
 					stopPollingRoundUpdate();
 					beginTurn(1);
 					updateActionReporting(data);
 				}
 				else {
-					console.error('Error updating round:', data.error);
+					if (data.message == "Continuing current round"){
+						console.log('Waiting for other player...')
+					}
+					else if (data.error){
+						console.error('Error updating round:', data.error);
+					}
 				}
 			})
 			.catch(error => {
@@ -230,15 +235,63 @@
 				if (p1AllDead || p2AllDead) {
 					//Assign the winner based on who is not all dead
 					ig.game.playerWon = p1AllDead ? 2 : 1; // if p1AllDead is true, player 2 wins, otherwise player 1 wins
-					console.log('player has won: ' + ig.game.playerWon)
+					console.log('Player has won: ' + ig.game.playerWon);
+					playEndingMusic();
+					
 					postGameEndResults(); 
 					return true;
 				}
 				else{
 					//No winner yet, game continues
 					ig.game.playerWon = false;
+					checkForGameEndRobust();
 					return false;
 				}
+			}
+		}
+		function checkForGameEndRobust() {
+			var p1Characters = ['p1C1data', 'p1C2data', 'p1C3data'];
+			var p2Characters = ['p2C1data', 'p2C2data', 'p2C3data'];
+
+			var p1LivingCharacters = 0;
+			var p2LivingCharacters = 0;
+
+			//Check if Player 1 characters are alive
+			p1Characters.forEach(identifier => {
+				var characterData = ig.game[identifier];
+				if (characterData && ig.game.getEntityByName(`ch${characterData.character_id}`) || characterData.location == 0) {
+					p1LivingCharacters++;
+				}
+			});
+
+			//Check if Player 2 characters are alive
+			p2Characters.forEach(identifier => {
+				var characterData = ig.game[identifier];
+				if (characterData && ig.game.getEntityByName(`ch${characterData.character_id}`) || characterData.location == 0) {
+					p2LivingCharacters++;
+				}
+			});
+
+			//Determine the game end condition
+			if (p1LivingCharacters === 0 || p2LivingCharacters === 0) {
+				ig.game.playerWon = p1LivingCharacters === 0 ? 2 : 1;
+				console.log('Player has won: ' + ig.game.playerWon);
+				playEndingMusic();
+				postGameEndResults(); 
+				return true;
+			}
+			else{
+				ig.game.playerWon = false;
+				return false;
+			}
+		}
+		function playEndingMusic(){
+			var pNum = ig.game.playerNumber == "p1" ? 1: 2;
+			if (ig.game.playerWon == pNum ){
+				ig.game.playMusicBro(4);
+			}
+			else{
+				ig.game.playMusicBro(5);
 			}
 		}
 		function postGameEndResults(){
@@ -252,6 +305,7 @@
 			.then(response => response.json())
 			.then(data => {
 				if (data.message == 'Game already concluded' || data.message == 'Game concluded and rewards updated'){
+					ig.game.playMusicBro(5);
 					ig.game.readyToEnd = true;
 					stopPollingRoundUpdate();
 					stopPollingRoundStatus();
@@ -317,32 +371,64 @@
 			return onBoardCharactersCount;
 		}
 		function makeTheActionStatement(actorName, actionName, targetName, trait, effect, result, actionType, targetID, actorID){
-			console.log(`1: actorName:${actorName}, actionName: ${actionName}, targetName: ${targetName}, trait: ${trait}, effect: ${effect}, result: ${result}, actionType: ${actionType}, targetID: ${targetID}, actorID: ${actorID}`)
+			
+			ig.game.actionReportCount++;
+			console.log(`${ig.game.actionReportCount}: actorName:${actorName}, actionName: ${actionName}, targetName: ${targetName}, trait: ${trait}, effect: ${effect}, result: ${result}, actionType: ${actionType}, targetID: ${targetID}, actorID: ${actorID}`)
 			
 			//1: actorName:Tukkuk Nanook, actionName: Spear Blizzard, targetName: Sir Nibblet Crossfield, trait: health, effect: 0, result: , actionType: Ranged, targetID: 3213, actorID: 3216
-			ig.game.actionReportCount++;
+			
+			//Freyja Snowbinder used Glacial Shard on Sierra 'Sightline' Kestrel and decreased health by 40 points.
 			var actionStatement = "";
 			var actionStatement1 = `${actorName} used ${actionName}`;
 			var actionStatementMissed1 = `${actorName} attempted to use ${actionName}`;
 			var targetStatement1 = `on ${targetName}`;
-			var wasWounded = "was wounded";
-			var targetHealth = getHealthByCharacterId(targetID);
 			
+			
+			var targetHealth = getHealthByCharacterId(targetID);
+			console.log(`${targetName}'s health = ${targetHealth}`)
+			
+			//Result Statements
+			var wasWounded = "was wounded";
 			var actorAlreadyDead = "was dead and could not take action";
 			var targetKilled = "was killed";
 			var targetAlreadyDead = "was already dead";
 			
-			var actorLoc = getLocationByCharacterId(actorID);
-			var targetLoc = getLocationByCharacterId(targetID);
+			/*if (trait == "health" && effect >= targetHealth){
+				result = targetKilled;
+			}*/
+			
 			ig.game.clearTileColors();
+					
+			//Clear These
+			var actorLoc = false;
+			var targetLoc = false;
 			var piece = false;
 			var piecePosX = false;
 			var piecePosY = false;
-			//var myTargetID = targetID.trim();
-			var targetVarName = "ch" + targetID;
-			targetVarName = targetVarName.replace(/\s/g, "");
-			targetNameStr = targetVarName.toString();
-
+			var targetVarName = false;
+			var targetNameStr = false;
+			var actorVarName = false;
+			var actorNameStr = false;
+			
+			//Set Them Again
+		
+			//Target ID	
+			if (targetID){
+				targetVarName = "ch" + targetID;
+				targetVarName = targetVarName.replace(/\s/g, "");
+				var targetNameStr = targetVarName.toString();
+				 targetLoc = getLocationByCharacterId(targetID);
+			}
+			
+			//Actor ID
+			if (actorID){
+				actorVarName = "ch" + actorID;
+				actorVarName = actorVarName.replace(/\s/g, "");
+				actorNameStr = actorVarName.toString();
+				actorLoc = getLocationByCharacterId(actorID);
+			}
+			
+			//Piece Position
 			if (ig.game.getEntityByName(targetNameStr)){
 				piece = ig.game.getEntityByName(targetNameStr);
 				piecePosX = piece.pos.x;
@@ -372,6 +458,12 @@
 				actionStatement = actionStatementMissed1 + " but was killed in action.";
 				ig.game.playDeadGuyActingSound();
 				ig.game.colorTile(actorLoc, 'target');
+				if (actorNameStr){
+					if (ig.game.getEntityByName(actorNameStr)){
+						var Char = ig.game.getEntityByName(actorNameStr);
+						Char.killMe();
+					}
+				}
 			}
 			else if (result == targetAlreadyDead){
 				//Character used attack was but was already dead.
@@ -379,9 +471,14 @@
 				ig.game.playMissSound();
 				ig.game.colorTile(actorLoc, 'actor');
 				ig.game.colorTile(targetLoc, 'target');
+				if (targetID){
+					if (ig.game.getEntityByName(targetNameStr)){
+						var Char = ig.game.getEntityByName(targetNameStr);
+						Char.killMe();
+					}
+				}
 			}
 			//actionStatment: Clyde Derringer, Quick Draw, Edmund Arrowfly, health, 9, was killed, Ranged,  3055, 3059
-
 			else if (result == targetKilled){
 				//Character used attack on dead character.
 				actionStatement = `${actionStatement1} caused ${effect} damage and killed ${targetName}.`;
@@ -444,12 +541,10 @@
 				}
 			}
 			
-			var statusNumName = `sn${actorID}on${targetID}`;
-						
 			if (piecePosX && piecePosY){
 				ig.game.spawnEntity( EntityStatuseffectnumbers, piecePosX, piecePosY - 35, {name: statusNumName,theActionType: actionType, theEffect: effect, theTrait: trait, characterID: targetID, myPiecePosX: piecePosX, myPiecePosY: piecePosY });
 			}
-
+			
 			return actionStatement;
 		}
 		
@@ -488,8 +583,6 @@
 					ig.game.centerCameraOnCharacterByID(data.simpleActionSummaries[0].actorId); //Center Camera on Actor
 					ig.game.moveReportingTxt1 = theStatement;
 					ig.game.lastMRTXT1 = theStatement;
-					
-					
 				}
 
 				//Calculate the interval for the remaining statements
@@ -528,13 +621,41 @@
 				updateMoveReporting(data);
 			}
 		}
+		function filterMoves(moveSummaries, simpleMoveSummaries) {
+			//Filter the moveSummaries that do not contain "stayed at"
+			const filteredIndices = moveSummaries
+			.map((summary, index) => summary.includes("stayed at") ? null : index)
+			.filter(index => index !== null);
+
+			//Filter the moveSummaries based on the filtered indices
+			const newMoveSummaries = filteredIndices.map(index => moveSummaries[index]);
+
+			//Filter the simpleMoveSummaries based on the filtered indices
+			const newSimpleMoveSummaries = filteredIndices.map(index => simpleMoveSummaries[index]);
+
+			return { newMoveSummaries, newSimpleMoveSummaries };
+		}
+		function filterDeadCharacters(moveSummaries, simpleMoveSummaries, getHealthByCharacterId) {
+			//Collect characters who are alive
+			const aliveIndices = simpleMoveSummaries
+			.map((moveSummary, index) => getHealthByCharacterId(moveSummary.characterId) > 0 ? index : null)
+			.filter(index => index !== null);
+
+			//Filter the moveSummaries based on the alive indices
+			const newMoveSummaries = aliveIndices.map(index => moveSummaries[index]);
+
+			//Filter the simpleMoveSummaries based on the alive indices
+			const newSimpleMoveSummaries = aliveIndices.map(index => simpleMoveSummaries[index]);
+
+			return { newMoveSummaries, newSimpleMoveSummaries };
+		}
 		function updateMoveReporting(data){
 			
 			//Clear Tile Colors			
 			ig.game.clearTileColors();
 			
 			//Clear old values
-			ig.game.moveReportingTxt1 = " ";
+			ig.game.moveReportingTxt1 = "No Movements.";
 			ig.game.moveReportingTxt2 = " ";
 			ig.game.moveReportingTxt3 = " ";
 			ig.game.moveReportingTxt4 = " ";
@@ -546,26 +667,44 @@
 				data.moveSummaries = data.moveSummaries.filter(summary => !summary.endsWith("square 0"));
 				data.moveSummaries = data.moveSummaries.filter(summary => !summary.endsWith("square 86"));
 
-				//Filter out bad data
+				//Filter out bad data like "stayed at" which is boring and wastes the users time.
 				data.simpleMoveSummaries = data.simpleMoveSummaries.filter(item => item.location != 0);
 				data.simpleMoveSummaries = data.simpleMoveSummaries.filter(item => item.location != 86);
+				
+				const filteredData = filterMoves(data.moveSummaries, data.simpleMoveSummaries);
+
+				console.log(filteredData.newMoveSummaries);
+				console.log(filteredData.newSimpleMoveSummaries);
+				
+				//These have been filtered for BORING stayed at results.
+				data.moveSummaries = filteredData.newMoveSummaries;
+				data.simpleMoveSummaries = filteredData.newSimpleMoveSummaries;
+				
+				//Now let's filter the DEAD characters:
+				const filteredData2 = filterDeadCharacters(data.moveSummaries, data.simpleMoveSummaries, getHealthByCharacterId);
+
+				console.log(filteredData2.newMoveSummaries);
+				console.log(filteredData2.newSimpleMoveSummaries);
+				
+				data.moveSummaries = filteredData2.newMoveSummaries;
+				data.simpleMoveSummaries = filteredData2.newSimpleMoveSummaries;
+				
+				
+				
 				
 				//Add the first statement immediately
 				ig.game.moveReportingTxt1 = data.moveSummaries[0] + ".";
 				ig.game.moveReportingTxt1 = changeReportWording(ig.game.moveReportingTxt1, ig.game.lastMRTXT1);
 				ig.game.lastMRTXT1 = ig.game.moveReportingTxt1;
-				var stayedAtSquareRegex = /stayed at square \d+$/;
-				if (stayedAtSquareRegex.test(ig.game.moveReportingTxt1)){
-					//Do Nothing
-				}
-				else{
+				if (data.simpleMoveSummaries[0]){
 					ig.game.centerCameraOnCharacterByID(data.simpleMoveSummaries[0].characterId); 
+					makeTheMove(data.simpleMoveSummaries[0]);
+					ig.game.clearTileColors();
+					ig.game.colorTile(data.simpleMoveSummaries[0].location, 'actor');
 				}
 				
 				
-				makeTheMove(data.simpleMoveSummaries[0]);
-				ig.game.clearTileColors();
-				ig.game.colorTile(data.simpleMoveSummaries[0].location, 'actor');
+				
 				
 
 				if (data.moveSummaries.length > 1){
@@ -585,10 +724,7 @@
 								makeTheMove(data.simpleMoveSummaries[1]);
 								ig.game.clearTileColors();
 								ig.game.colorTile(data.simpleMoveSummaries[1].location, 'actor');
-								if (stayedAtSquareRegex.test(ig.game.moveReportingTxt2)){
-									//Do Nothing
-								}
-								else{
+								if (data.simpleMoveSummaries[1]){
 									ig.game.centerCameraOnCharacterByID(data.simpleMoveSummaries[1].characterId); 
 								}
 								ig.game.lastMRTXT2 = ig.game.moveReportingTxt2;
@@ -599,10 +735,7 @@
 								makeTheMove(data.simpleMoveSummaries[2]);
 								ig.game.clearTileColors();
 								ig.game.colorTile(data.simpleMoveSummaries[2].location, 'actor');
-								if (stayedAtSquareRegex.test(ig.game.moveReportingTxt3)){
-									//Do Nothing
-								}
-								else{
+								if (data.simpleMoveSummaries[2]){
 									ig.game.centerCameraOnCharacterByID(data.simpleMoveSummaries[2].characterId); 
 								}
 								ig.game.lastMRTXT3 = ig.game.moveReportingTxt3;
@@ -613,10 +746,7 @@
 								makeTheMove(data.simpleMoveSummaries[3]);
 								ig.game.clearTileColors();
 								ig.game.colorTile(data.simpleMoveSummaries[3].location, 'actor');
-								if (stayedAtSquareRegex.test(ig.game.moveReportingTxt4)){
-									//Do Nothing
-								}
-								else{
+								if (data.simpleMoveSummaries[3]){
 									ig.game.centerCameraOnCharacterByID(data.simpleMoveSummaries[3].characterId); 
 								}
 								ig.game.lastMRTXT4 = ig.game.moveReportingTxt4;
@@ -627,10 +757,7 @@
 								makeTheMove(data.simpleMoveSummaries[4]);
 								ig.game.clearTileColors();
 								ig.game.colorTile(data.simpleMoveSummaries[4].location, 'actor');
-								if (stayedAtSquareRegex.test(ig.game.moveReportingTxt5)){
-									//Do Nothing
-								}
-								else{
+								if (data.simpleMoveSummaries[4]){
 									ig.game.centerCameraOnCharacterByID(data.simpleMoveSummaries[4].characterId); 
 								}
 								ig.game.lastMRTXT5 = ig.game.moveReportingTxt5;
@@ -641,11 +768,8 @@
 								makeTheMove(data.simpleMoveSummaries[5]);
 								ig.game.clearTileColors();
 								ig.game.colorTile(data.simpleMoveSummaries[5].location, 'actor');
-								if (stayedAtSquareRegex.test(ig.game.moveReportingTxt6)){
-									//Do Nothing
-								}
-								else{
-									ig.game.centerCameraOnCharacterByID(data.simpleMoveSummaries[5].characterId); 
+								if (data.simpleMoveSummaries[5].characterId){
+									ig.game.centerCameraOnCharacterByID(data.simpleMoveSummaries[5]); 
 								}
 								ig.game.lastMRTXT6 = ig.game.moveReportingTxt6;
 							}
@@ -768,13 +892,14 @@
 				});
 
 				const result = await response.json();
-
+				/*
 				if (result.success){
 					console.log('Deck updated successfully in session!');
 				}
 				else{
 					console.error('Failed to update deck in session:', result.message);
 				}
+				*/
 			} 
 			catch (err){
 				console.error('Error while updating deck in session:', err);
@@ -849,6 +974,10 @@
 				updateCharacterPositionsFromSummaries();
 				clearPlayerActions();
 				ig.game.initialOccupiedTiles = ig.game.determineInitialPlayerOccupiedTiles();
+				//This is used solely in the main.js file to reset a function to submit players 
+				//moves after round time is up but this limits so that it doesn't happen too soon.
+				ig.game.reportingIsHappening = true;
+				ig.game.reportingIsHappeningTimer.set(20);
 			}
 		}
 
@@ -858,6 +987,8 @@
 			ig.game.gameActive = true;
 			ig.game.clearTileColors();
 			synchronizeCharacters();
+			//Try to call it again because what the hell...
+			setTimeout(clearDeadGuysOffTheBoard, 7000);
 		}
 
 		function closeAllOpenWindows(){
@@ -869,6 +1000,24 @@
 			ig.game.displayCardView = 1;
 		}
 		
+		function clearDeadGuysOffTheBoard() {
+			var p1Characters = ['p1C1data', 'p1C2data', 'p1C3data'];
+			var p2Characters = ['p2C1data', 'p2C2data', 'p2C3data'];
+
+			//Function to clear dead characters for a given player
+			function clearDeadCharacters(characters) {
+				characters.forEach(characterKey => {
+					var character = ig.game[characterKey];
+					if (character && parseInt(character.health) <= 0) {
+						character.location = 86;
+					}
+				});
+			}
+			//Check and clear dead characters for Player 1
+			clearDeadCharacters(p1Characters);
+			//Check and clear dead characters for Player 2
+			clearDeadCharacters(p2Characters);
+		}
 
 		function initializeGameMoves(){
 			const gameMoves = {
@@ -913,7 +1062,7 @@
 				}
 				else{
 					checkForGameEnd();
-					console.log('Game over...');
+					console.log('Game over... Other player ended it...');
 				}
 			})
 			.catch(error => {

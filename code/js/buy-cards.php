@@ -16,17 +16,15 @@
 		
 		async function checkIfUserHasPacks(){
 			let web3 = new Web3(Web3.givenProvider);
-			console.log("window['userAccountNumber'] = " + window['userAccountNumber']);
+			//console.log("window['userAccountNumber'] = " + window['userAccountNumber']);
 			var contract = new web3.eth.Contract(abi2, packsTokenAddress, {});
 			balance = await contract.methods.balanceOf(window['userAccountNumber']).call();
 			userPackBalance = balance * .000000000000000001;
 			userPackBalance = userPackBalance.toFixed(1)
 			//document.getElementById("packsLeft").innerHTML = packBalance;
-			console.log('userPackBalance = ' + userPackBalance);
 			if (userPackBalance >= 1){
 				var checkbox = document.getElementById("tosCheckBox");
 				var conJPack = userPackBalance == 1 ? "PACK" : "PACKS";
-				console.log('user has packs and can open them');
 				
 				var refAmount = "One";
 				if (userPackBalance == 1){
@@ -45,13 +43,6 @@
 				document.getElementById("open-packs-div").innerHTML = "";
 			}
 			
-		}
-		//If User is Signed In, Check For Packs...
-		if (window['userAccountNumber'] || signedInToServerAs){
-			if (!window['userAccountNumber'] ){
-				window['userAccountNumber'] = signedInToServerAs;
-			}
-			checkIfUserHasPacks();
 		}
 		/*
 		async function withdrawl(){
@@ -108,15 +99,11 @@
 						console.log('purchase hashed...');
 						console.log(hash);
 						disableBuyButton('Already Buying Packs');
-						var loadingWheelDiv = document.getElementById("loading-wheel-div");
-						//var lwMsg = document.getElementById("waiting-msg");
-						loadingWheelDiv.className = "";
-						//lwMsg.innerHTML = ""
+						toggleLoadingWheel(1, "on");
 						changePacksMessage("Your transaction to purchase " + amountToBuy + " PACKS was sent.");
 					}).on('receipt', function(receipt){
 						console.log('purchase complete...');
-						var loadingWheelDiv = document.getElementById("loading-wheel-div");
-						loadingWheelDiv.className = "hide";
+						toggleLoadingWheel(1, "off");
 						changePacksMessage("Your purchase is complete.<br/>Click the Button Below to Open PACKS.");
 						enableBuyButton('Buy Packs Now')
 						checkPacksInTime(3000);
@@ -166,17 +153,20 @@
 			var checkbox = document.getElementById("tosCheckBox");
   			var buyButtonDiv = document.getElementById("buy-button-div");
   			var ppSliderDiv = document.getElementById("purchase-packs-slider-unit");
+  			var usrPackMessWrapper = document.getElementById("users-packs-message-wrapper");
 			if (checkbox.checked) {
 				buyButtonDiv.innerHTML = "<button id='buy-pack-button' class='button' onclick = 'buyPacks()'>BUY PACKS NOW</button>";
 				ppSliderDiv.className = "";
+				usrPackMessWrapper.className = "";
 				checkIfUserHasPacks(); //Check for tokens
 				window.scrollTo(0, document.body.scrollHeight);				
 			}
 			else {
 				buyButtonDiv.innerHTML = "<button id='buy-pack-button' class='disabledbutton' disabled>AGREE TO TOS TO BUY PACKS</button>";
 				ppSliderDiv.className = "hide";
+				usrPackMessWrapper.className = "displayNone";
 				setTimeout(function(){
-					console.log('scroll to bottom 2');
+					//console.log('scroll to bottom 2');
 					window.scrollTo(0, document.body.scrollHeight);
 				}, 100);
 			}
@@ -204,7 +194,7 @@
 		}
 		
 		document.addEventListener('DOMContentLoaded', function() {//Make Sure Terms Have Been Read
-		    var termsContent = document.getElementById('terminalBody-03');
+			var termsContent = document.getElementById('terminalBody-03');
 			termsContent.addEventListener('scroll', function() {
 				if (termsContent.scrollTop + termsContent.clientHeight >= termsContent.scrollHeight - 100) {
 					enableCheckBox();
@@ -219,25 +209,21 @@
 				
 			var contract = new web3.eth.Contract(abi2, packsTokenAddress, {});
 			const allowance = await contract.methods.allowance(window['userAccountNumber'], openPackContractAddress).call();
-			console.log('my PACKS allowance = ' + allowance);
 						
 			if (parseInt(allowance) < 1000000000000000000){
 				approving = true;
 				approvingComplete = true;
-				console.log('You need to approve this contract to spend your PACK.');
 				var amount = 9999999999999999;
 				var approveNum =  web3.utils.toWei(amount.toString(), 'ether')
 				alert("You need to approve this contract to spend your PACK.");
 				const approveAmount = await contract.methods.approve(openPackContractAddress,approveNum).send({
 					from: window['userAccountNumber']
 				}).on('transactionHash', function(hash){
-					var loadingWheelDiv = document.getElementById("loading-wheel-div-02");
-					loadingWheelDiv.className = "";
+					toggleLoadingWheel(1, "on");
 					document.getElementById("users-packs-message").innerHTML = "Approving PACK Spend...";
 				}).on('receipt', function(receipt){
 					console.log('PACK spend approved. Ready to open a PACK.');
-					var loadingWheelDiv = document.getElementById("loading-wheel-div");
-					loadingWheelDiv.className = "hide";
+					toggleLoadingWheel(1, "off");
 					document.getElementById("users-packs-message").innerHTML = "PACK Spend Approved. Opening PACK...";
 					openAPack();
 					return;		
@@ -247,6 +233,30 @@
 				openAPack();
 			}
 		
+		}
+		function toggleLoadingWheel(which, way){
+			var loadingWheelDiv = document.getElementById("loading-wheel-div");
+			var loadingWheelDiv3wrapper = document.getElementById("loading-wheel-div-03-wrapper");
+			if (which == 1){
+				loadingWheelDiv.className = way == "on" ? "" : "hide";
+			}
+			else{
+				if (way == "on"){
+					var loadingWheel3 = `<div id='loading-wheel-div-03'>
+						<div>
+							<img src='/images/loading-wheel-02.gif'/>
+						</div>
+						<div id='waiting-msg-03'>
+							&nbsp;
+						</div>
+					</div>`;
+
+					loadingWheelDiv3wrapper.innerHTML = loadingWheel3;
+				}
+				else{
+					loadingWheelDiv3wrapper.innerHTML = "";
+				}
+			}
 		}
 		async function openAPack(){
 			let web3 = new Web3(Web3.givenProvider);
@@ -263,8 +273,7 @@
 				//maxPriorityFeePerGas:5000000000
 			
 			}).on('transactionHash', function(hash){
-				var loadingWheelDiv = document.getElementById("loading-wheel-div-02");
-				loadingWheelDiv.className = "";
+				toggleLoadingWheel(2, "on");
 				document.getElementById("users-packs-message").innerHTML = "OPEN PACK: Mining Transaction...";
 				disableOpenButton("Already Opening a Pack");
 				disableBuyButton("Opening a Pack Right Now");
@@ -286,7 +295,7 @@
 				document.getElementById("users-packs-message").innerHTML = "OPEN PACK: Request " + shortReqID + "[...] is Waiting for Fulfilment...";
 			}
 			else if (fulfillCheckCount == 20){
-				document.getElementById("users-packs-message").innerHTML = "OPEN PACK: Still Waiting...";
+				document.getElementById("users-packs-message").innerHTML = "OPEN PACK: Still Waiting... I'm not sure why this takes several minutes, but it may.";
 			}
 			else if (fulfillCheckCount == 30){
 				document.getElementById("users-packs-message").innerHTML = "OPEN PACK: I promise it's not broken. It just takes a long time to fulfill on this testnet.";
@@ -320,12 +329,14 @@
 			}
 			
 			if (didFulfill){
+				toggleLoadingWheel(2, "on");
 				clearInterval(oracleCheck);
 				fulfillCheckCount = 0;
 				enableOpenButton("OPEN PACK");
 				enableBuyButton("Buy Packs Now");
 				document.getElementById("users-packs-message").innerHTML = "Your Pack Was Opened. Your cards are below!";
 				checkPacksInTime(7000);
+				toggleLoadingWheel(2, "off");
 				var word1 = await contract.methods.mapIdToWord1(requestID).call();
 				var word2 = await contract.methods.mapIdToWord2(requestID).call();
 				var word3 = await contract.methods.mapIdToWord3(requestID).call();
@@ -333,6 +344,7 @@
 				var word5 = await contract.methods.mapIdToWord5(requestID).call();
 				var word6 = await contract.methods.mapIdToWord6(requestID).call();
 				var word7 = await contract.methods.mapIdToWord7(requestID).call();
+				//setTimeout(displayCards, 3000, word1, word2, word3, word4, word5, word6, word7);
 				displayCards(word1, word2, word3, word4, word5, word6, word7);
 				console.log(`Numbers: ${word1}, ${word2}, ${word3}, ${word4}, ${word5}, ${word6}, ${word7}`)
 			}
@@ -341,8 +353,7 @@
 			
 			let web3 = new Web3(Web3.givenProvider);
 			var contract = new web3.eth.Contract(abi4, openPackContractAddress, {});
-			var loadingWheelDiv = document.getElementById("loading-wheel-div-02");
-			loadingWheelDiv.className = "";
+			toggleLoadingWheel(2, "on");
 		 	oracleReturnDisplay = false;
 			//myRequestID = await contract.methods.lastRequestID.call();
 			myRequestID = await contract.methods.lastRequestID().call();
@@ -463,23 +474,44 @@
 			}
 			return cardNum;
 		}
-		function displayCards(w1,w2,w3,w4,w5,w6,w7){
-			var cardsDIV = document.getElementById("pulled-cards-div");
-			var pulledCards = [];
-			var card1 = returnCardNumber(w1);
-			var card2 = returnCardNumber(w2);
-			var card3 = returnCardNumber(w3);
-			var card4 = returnCardNumber(w4);
-			var card5 = returnCardNumber(w5);
-			var card6 = returnCardNumber(w6);
-			var card7 = returnCardNumber(w7);
-			pulledCards.push(card1);
-			pulledCards.push(card2);
-			pulledCards.push(card3);
-			pulledCards.push(card4);
-			pulledCards.push(card5);
-			pulledCards.push(card6);
-			pulledCards.push(card7);
-			var structuredPulledCardData = setCardData(pulledCards, 0);	
+		function displayCards(w1, w2, w3, w4, w5, w6, w7){
+			var pulledCards = [w1, w2, w3, w4, w5, w6, w7].map(returnCardNumber);
+
+			var mockDeck = pulledCards.reduce((deck, cardId) => {
+				deck[cardId] = (deck[cardId] || 0) + 1;
+				return deck;
+			}, {});
+	
+			var structuredPulledCardData = setCardData([mockDeck], 0);
+
+			//Flatten the card data to account for quantity
+			var flattenedCardData = [];
+			structuredPulledCardData.forEach(card => {
+				for (let i = 0; i < card.Quantity; i++) {
+					flattenedCardData.push(card);
+				}
+			});
+
+			//Use the flattenedCardData to display the images
+			var pulledCardsDiv = document.getElementById("pulled-cards-div");
+			pulledCardsDiv.innerHTML = "<h2 id='just-pulled-hdr' class='center-text'>Here Are The Cards That You Just Pulled!</h2>";
+			pulledCardsDiv.innerHTML += "<div class='flexBreak'></div>";
+			flattenedCardData.forEach((card, index) => {
+				if (index < 7) { // Limit to 7 cards
+					var cardImage = card.dir + "card.jpg";
+					var cardElement = "<a class='flexLink' target='_blank' href='" + cardImage + "'><div class='my-card-img'><img src='" + cardImage + "'/></div></a>";
+					pulledCardsDiv.innerHTML += cardElement;
+					if (index == 3) { // Add a break after the fourth card
+						pulledCardsDiv.innerHTML += "<div class='flexBreak'></div>";
+					}
+				}
+			});
+			
+			pulledCardsDiv.innerHTML += "<div class='flexBreak'></div>";
+			var syncMess = "<div id='sync-message'>Synchronizing New Cards to Your Account...</div>";
+			pulledCardsDiv.innerHTML +=syncMess;
+			synchronizeMyDeck();
+			document.getElementById("play-game-button-div").className = "center-text";
+			
 		}
 	</script>

@@ -1,0 +1,16 @@
+{
+	"name": "Potion of Regeneration",
+	"dir": "/cards/items/potion-of-regeneration/",
+	"cardNumber": "156",
+	"cardType": "Item Card",
+	"class": "Magic Potion",
+	"rarity": "Diamond",
+	"effect": [{
+		"name": "Drink",
+		"type": "Boost",
+		"healthStatus": "regen",
+		"hs_int": "5",
+		"trait": "health",
+		"effect": "5"
+	}]
+}

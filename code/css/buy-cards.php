@@ -115,7 +115,7 @@
 			margin-top: 4em;
 		}
 		
-		#loading-wheel-div, #loading-wheel-div-02{
+		#loading-wheel-div, #loading-wheel-div-02, #loading-wheel-div-03{
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -170,8 +170,9 @@
 		}
 		#just-pulled-hdr{
 			margin-bottom: 2em;
-			font-size: 2em;
+			font-size: 3em;
 			line-height: 1.5em;
+			color:#33FF33;
 		}
 		#play-game-button-div{
 			display: flex;

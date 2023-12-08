@@ -1,0 +1,14 @@
+{
+	"name": "Intermediate First Aid Kit",
+	"dir": "/cards/items/intermediate-first-aid-kit/",
+	"cardNumber": "152",
+	"cardType": "Item Card",
+	"class": "Medical Care",
+	"rarity": "Platinum",
+	"effect": [{
+		"name": "Ingest",
+		"type": "Boost",
+		"trait": "health",
+		"effect": "25"
+	}]
+}

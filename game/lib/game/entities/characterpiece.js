@@ -413,16 +413,12 @@ EntityCharacterpiece=ig.Entity.extend({
 			this.anims.p2c3chillKill.rewind();
 			this.killMeNow = true;
 			this.killMeTimer.set(2);
+			ig.game[this.mydboVar].location = 86;
 		}
 	},
 	kill: function(from){
-		if (parseInt(ig.game[this.mydboVar].health) <= 0 || ig.game[this.mydboVar].location == 86 || ig.game[this.mydboVar].health <= 0){
-			checkForGameEnd();
-			this.parent();
-		}
-		else{
-			this.parent();
-		}
+		checkForGameEnd();
+		this.parent();
 	},
 	inFocus: function() {
     return (

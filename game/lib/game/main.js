@@ -80,6 +80,8 @@ MyGame = ig.Game.extend({
 		l2: new ig.Sound('media/music/spacetrip.*', false ),
 		l3: new ig.Sound('media/music/wound.*', false ),
 		l4: new ig.Sound('media/music/yeah.*', false ),
+		l5: new ig.Sound('media/music/darkness.*', false ),
+		l6: new ig.Sound('media/music/04.*', false ),
 	},
 	
 	//Sounds
@@ -179,6 +181,7 @@ MyGame = ig.Game.extend({
 		this.musicDelayTimer = new ig.Timer(0);
 		this.timeLeftInTurn = new ig.Timer(0);
 		this.turnReportingTime = new ig.Timer(0);
+		this.reportingIsHappeningTimer = new ig.Timer(0);
 
 		//Load Title Screen images into impact
 		this.loadTSImages();
@@ -210,6 +213,8 @@ MyGame = ig.Game.extend({
 		ig.music.add (this.songs.l2, 02, ["l2"] );
 		ig.music.add (this.songs.l3, 03, ["l3"] );
 		ig.music.add (this.songs.l4, 04, ["l4"] );
+		ig.music.add (this.songs.l5, 05, ["l5"] );
+		ig.music.add (this.songs.l6, 06, ["l6"] );
 		
 		ig.music.loop = true;
 		ig.music.volume = this.musicLevel;	
@@ -231,6 +236,20 @@ MyGame = ig.Game.extend({
 			ig.game.pause = false;	
 		}
 		
+		//Play Music For Video
+		if (this.titleScreen && ig.input.released('left')){
+			this.playMusicBro(3);
+		}
+		if (this.titleScreen && ig.input.released('action')){
+			this.playMusicBro(4);
+		}
+		if (this.titleScreen && ig.input.released('jump')){
+			this.playMusicBro(5);
+		}
+		if (this.titleScreen && ig.input.released('right')){
+			this.playMusicBro(6);
+		}
+		
 		//Flash Message
 		if (ig.game.readyToEnd && this.flashMsg && this.flashMessageTimer.delta() > 0){
 			this.flashMessageTimer.set(this.flashMsgOffTime);
@@ -240,6 +259,8 @@ MyGame = ig.Game.extend({
 			this.flashMessageTimer.set(this.flashMsgOnTime);
 			this.flashMsg = true;
 		}
+		
+		
 		
 		//Clear the Cut Screen
 		if (!this.cutCleared && this.transitionReady && ig.input.released('click') && !ig.game.transition){
@@ -251,6 +272,10 @@ MyGame = ig.Game.extend({
 		if (ig.game.turnReporting && this.turnReportingTime.delta() > 0){
 			endTurnReporting();
 		}
+/*		if (ig.input.released('action')){
+			console.log(`ig.game.turnReporting = ${ig.game.turnReporting} && this.turnReportingTime.delta() = ${this.turnReportingTime.delta()} and ig.game.turnEnded = ${ig.game.turnEnded }`);
+		}
+*/
 		var camSpeed = 15;
 		var margin = 32;
 		
@@ -271,8 +296,13 @@ MyGame = ig.Game.extend({
 			reloadPage();
 		}
 		
+		//Limit the function below from happening at inappropriate times...
+		if (ig.game.reportingIsHappening && ig.game.reportingIsHappeningTimer.delta() > 0){
+			ig.game.reportingIsHappening = false;
+		}
 		//End turn if player runs out of time.
-		if (ig.game.timeLeftInTurn.delta() > 0 && ig.game.gameActive){
+		if (ig.game.timeLeftInTurn.delta() > 0 && ig.game.gameActive && !ig.game.reportingIsHappening && !ig.game.turnEnded ){
+			console.log('Submit moves because player did not hit end button');
 			endTurn(3);
 		}
 	},
@@ -449,6 +479,14 @@ MyGame = ig.Game.extend({
 		else if(which == 4){
 			ig.game.musicLevel = .25;
 			ig.music.play(04);	
+		}
+		else if(which == 5){
+			ig.game.musicLevel = .25;
+			ig.music.play(05);	
+		}
+		else if(which == 6){
+			ig.game.musicLevel = .25;
+			ig.music.play(06);	
 		}
 	
 		if (!ig.game.muteGame){
@@ -1254,6 +1292,7 @@ MyGame = ig.Game.extend({
 		return enemyLocations;
 	},
 	highlightAdjacentTiles: function(tileNumber, whatWay){
+		tileNumber = parseInt(tileNumber);
 		const adjacentTiles = this.getAdjacentTiles(tileNumber);
 		if (adjacentTiles){
 			adjacentTiles.forEach(tile => {
@@ -1342,27 +1381,6 @@ MyGame = ig.Game.extend({
 		}
 		return locations;
 	},
-	/*
-	deselectPlayerOccupiedTiles: function(tile, player) {
-		//Convert tile to an integer if it's a string
-		var tileNumber = parseInt(tile, 10);
-
-		//Get all adjacent tiles as integers
-		var adjacentTiles = ig.game.getAdjacentTiles(tileNumber).map(t => parseInt(t, 10));
-
-		//Get adjacent tiles that are occupied by the player
-		var playerCharacterInfo = ig.game.getAdjacentPlayerLocations(player, tileNumber);
-
-		//Extract only the location numbers as integers from playerCharacterInfo
-		var playerOccupiedTiles = playerCharacterInfo.map(info => parseInt(info.location, 10));
-
-		//Clear colors for tiles that are both adjacent and occupied
-		playerOccupiedTiles.forEach(occupiedTile => {
-			if (adjacentTiles.includes(occupiedTile)) {
-				ig.game.clearOneTileColor(occupiedTile);
-			}
-		});
-	},*/
 	determineInitialPlayerOccupiedTiles: function(){
 		var pNum = ig.game.playerNumber == "p1" ? 1: 2;
 		var playerLoc = this.getPieceLocationsOfPlayer(pNum);

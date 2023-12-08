@@ -1,0 +1,36 @@
+{
+    "name": "Scroll of Limited Darkness | Happy Fun Kill Club Series 1",
+    "description": "Platinum level magic spell for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/items/scroll-of-limited-darkness/card.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Scroll of Limited Darkness"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "155"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Item Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Gold"
+        },
+        {
+            "trait_type": "Aim",
+            "value": 15
+        },
+        {
+            "trait_type": "Element",
+            "value": "Darkness"
+        },
+        {
+            "trait_type": "Item Description",
+            "value": "With this magic scroll, anyone can cast a spell which decreases the AIM of ALL characters effected by darkness."
+        }
+    ]
+}

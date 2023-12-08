@@ -9,6 +9,7 @@
 	}
 	//Set Round Number
 	$_SESSION['roundNumber'] = 1;
+	$_SESSION['nextRoundEnd'] = date('Y-m-d H:i:s', strtotime('+66 seconds'));
 	
 	require_once($_SERVER['DOCUMENT_ROOT'] . '/code/php/mysql-connect.php');
 

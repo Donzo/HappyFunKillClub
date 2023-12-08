@@ -266,7 +266,7 @@
 								$targetStats['health'] -= $damage;
 								
 								//Adjust health to zero if it went under and move character out of game.
-								if ($targetStats['health'] < 0){
+								if ($targetStats['health'] <= 0){
 									$targetStats['health'] = 0;
 									$targetStats['location'] = 86;
 									$finalEffectNarrative = "was killed";

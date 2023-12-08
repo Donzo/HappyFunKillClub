@@ -1,0 +1,32 @@
+{
+    "name": "Potion of Regeneration | Happy Fun Kill Club Series 1",
+    "description": "Platinum level magic potion for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/items/potion-of-regeneration/card.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Potion of Regeneration"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "156"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Item Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Platinum"
+        },
+        {
+            "trait_type": "Health",
+            "value": 5
+        },
+        {
+            "trait_type": "Item Description",
+            "value": "Drink this potion to acquire the power of regeneration and regain your health  at a rate of 5 points per turn."
+        }
+    ]
+}

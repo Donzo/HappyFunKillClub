@@ -25,11 +25,16 @@
 		
 		var redCoinTokenAddress = '0x4E78Ca0D3B4dcd9b030F61B58BaC521b901545f5';
 		var redCoinMintingContractAddress = '0xFc47A741D4ba3AC0c25b74bE46c121621947fae7'; //Uses Chainlink Functions
+		var itemMintingContractAddress = '0xbbc65DAef7973ca210C1BB36AB164e62832c8a0f';
 		var clSubscriptionID = 1569;
 		var clFunctionArgs = [];
-		window.userToken 
-		//["0xac4222bbfd2a0184c95be18f3626efab68b675c9", "18a3fa3224cffc5a044b"]
 		
+		//Make sure user window account object exists...
+		if (window['userAccountNumber'] || signedInToServerAs){
+			if (!window['userAccountNumber'] ){
+				window['userAccountNumber'] = signedInToServerAs;
+			}
+		}
 		
 		async function mintRedCoins(){
 			clFunctionArgs.length = 0;
@@ -37,13 +42,13 @@
 			var accountStr = window['userAccountNumber'].toString();
 			clFunctionArgs.push(accountStr);
 			clFunctionArgs.push(tkn);
-			console.log(clFunctionArgs);
+			//console.log(clFunctionArgs);
 			
 			let web3 = new Web3(Web3.givenProvider);
 			
 			var accountBalance = await web3.eth.getBalance(accountStr);
 			var mintCost = 10000000000000000;
-			console.log(accountBalance);
+			//console.log(accountBalance);
 			if (accountBalance >= mintCost){
 				var contract = new web3.eth.Contract(abi1, redCoinMintingContractAddress, {});
 				openingPack = false;
@@ -60,12 +65,12 @@
 			
 				}).on('transactionHash', function(hash){
 					ig.game.titleScreenTxt = "Transaction Request Submitted...";
-					console.log('transaction hashed...');
+					//console.log('transaction hashed...');
 					//displayOpenPack();
 				}).on('receipt', function(receipt){
 					ig.game.titleScreenTxt = "Transaction Request Mined...";
-					console.log('transaction received...');
-					console.log(receipt);
+					//console.log('transaction received...');
+					//console.log(receipt);
 					//displayWaitingForOracle();
 					waitForOracle();				
 				});
@@ -89,8 +94,8 @@
 		 	oracleReturnDisplay = false;
 			myRequestID = await contract.methods.s_lastRequestId().call();
 			var redCoinsToMint = await contract.methods.redCoins().call();
-			console.log('myRequestID:', myRequestID);
-			console.log(myRequestID);
+			//console.log('myRequestID:', myRequestID);
+			//console.log(myRequestID);
 			var length = 7;
 			var trimmedID = myRequestID.substring(0, length);
 			trimmedID += "..."
@@ -108,7 +113,7 @@
 				fromBlock: "pending"
 			}, function(error, event){ console.log(event); })
 			.on('data', function(event){
-				console.log(event);
+				//console.log(event);
 				ig.game.titleScreenTxt = "Chainlink Functions Request Received...";
 				
 				//var mintingRedCoins = event.returnValues.redCoins;
@@ -127,7 +132,86 @@
 			})
 			.on('error', console.error);
 		}
+		async function buyItem(which, cost){
+			checkRedCoinAllowance(which, cost);
+		}
+		async function buyTheItem(whichItem, itemCost){
+			let web3 = new Web3(Web3.givenProvider);
+			var contract = new web3.eth.Contract(abi6, itemMintingContractAddress, {});
+			const mintItem = await contract.methods.spendRedCoin(whichItem).send({
+					from: window['userAccountNumber']
+				}).on('transactionHash', function(hash){
+					toggleRCSLoadingWheel("on", "Buying Item...");
+					document.body.scrollTop = document.documentElement.scrollTop = 0;
+					//console.log('Spending RedCoin...')
+				}).on('receipt', function(receipt){
+					toggleRCSLoadingWheel("off", "Purchase Successful.");
+					sendRCSaMessage("Purchase Successful!")
+					console.log('Item minted.');
+					console.log(receipt)
+					return;		
+			});
+		}
+		function toggleRCSLoadingWheel(way, progressMessage){
+			var loadingWheelDiv = document.getElementById("purchase-progress-div");
+			
+			if (!progressMessage){
+				progressMessage = "Loading...";
+			}
+			
+			if (way == "on"){
+				var loadingWheelCode = `<div id='loading-wheel-div-03'>
+					<div>
+						<img src='/images/loading-wheel-02.gif'/>
+					</div>
+					<div id='waiting-msg-05'>
+						${progressMessage}
+					</div>
+				</div>`;
 
+				loadingWheelDiv.innerHTML = loadingWheelCode;
+			}
+			else{
+				loadingWheelDiv.innerHTML = "";
+			}
+		}
+		function sendRCSaMessage(progressMessage, link){
+			
+			var loadingWheelDiv = document.getElementById("purchase-progress-div");
+			loadingWheelDiv.innerHTML = progressMessage;
+		}	
+		async function checkRedCoinAllowance(whichItem, itemCost){
+			//Add a bunch of 0 points because tokens have a lot of zero values.
+			var adjustedItemCost = itemCost * 10**18;
+			//First Check Allowance
+			let web3 = new Web3(Web3.givenProvider);
+				
+			var contract = new web3.eth.Contract(abi2, redCoinTokenAddress, {});
+			const allowance = await contract.methods.allowance(window['userAccountNumber'], itemMintingContractAddress).call();
+						
+			if (parseInt(allowance) < adjustedItemCost){
+				approving = true;
+				approvingComplete = true;
+				var amount = 999999999999999999;
+				var approveNum =  web3.utils.toWei(amount.toString(), 'ether')
+				alert("You need to give the store approval to spend your RedCoin.");
+				const approveAmount = await contract.methods.approve(itemMintingContractAddress,approveNum).send({
+					from: window['userAccountNumber']
+				}).on('transactionHash', function(hash){
+					toggleRCSLoadingWheel("on", "Approving RedCoin Store to Spend RedCoin Token...");
+				}).on('receipt', function(receipt){
+					toggleRCSLoadingWheel("off", "RedCoin Spend Approved. Buy Item?");
+					sendRCSaMessage("RedCoin Spend Approved.")
+					buyTheItem(whichItem, adjustedItemCost);
+					return;		
+				});
+			}
+			else{
+				sendRCSaMessage("RedCoin Spend Already Approved. Buy Item?")
+				buyTheItem(whichItem, adjustedItemCost);
+			}
+		
+		}
 		async function getUsersCards(){
 			
 			fetch('/code/php/getCards.php')
@@ -140,7 +224,14 @@
        			}
 			})
 		}
-		
+		async function getRedCoinAmount(){
+			let web3 = new Web3(Web3.givenProvider);
+			var contract = new web3.eth.Contract(abi2, redCoinTokenAddress, {});
+			balance = await contract.methods.balanceOf(window['userAccountNumber']).call();
+			userRedCoinBalance = balance * .000000000000000001;
+			userRedCoinBalance = userRedCoinBalance.toFixed(1)
+			sendRCSaMessage("You have " + userRedCoinBalance + " RedCoins.");
+		}
 		async function fetchCardJSON(){
 			const response = await fetch(mySelectedCard + 'game.json');
 			//console.log(response);
@@ -175,6 +266,4 @@
 				document.getElementById(id).disabled = true;
 			}
 		}
-		
-		
 	</script>

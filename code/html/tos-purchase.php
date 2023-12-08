@@ -82,17 +82,12 @@
 	<div id='buy-button-div'>
 		<button id='buy-pack-button' class='disabledbutton' disabled>AGREE TO TOS TO BUY PACK</button>
 	</div>
-	<div id='users-packs-message-wrapper'>
+	<div id='users-packs-message-wrapper' class="displayNone">
 		<div id='users-packs-message' class='center-text users-packs-message'>
 		
 		</div>
-		<div id='loading-wheel-div-02' class='hide'>
-			<div>
-				<img src='/images/loading-wheel-02.gif'/>
-			</div>
-			<div id='waiting-msg-02'>
-				&nbsp;
-			</div>
+		<div id='loading-wheel-div-03-wrapper'>
+
 		</div>
 		<div id="pulled-cards-div" class="my-cards">
 		</div>

@@ -1,0 +1,14 @@
+{
+	"name": "Level 2 Bulletproof Vest",
+	"dir": "/cards/items/level-2-bulletproof-vest/",
+	"cardNumber": "151",
+	"cardType": "Item Card",
+	"class": "Body Armor",
+	"rarity": "Gold",
+	"effect": [{
+		"name": "Wear",
+		"type": "Boost",
+		"trait": "defend",
+		"effect": "15"
+	}]
+}

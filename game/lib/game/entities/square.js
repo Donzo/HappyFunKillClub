@@ -47,9 +47,9 @@ EntitySquare=ig.Entity.extend({
 		this.addAnim( 'rangeTarget', 1, [7], true );
 		this.addAnim( 'boost', 1, [8], true );
 		this.addAnim( 'drainMeleeRange', 1, [9], true );
-		this.addAnim( 'drainMeleeTarget', 1, [10], true );
+		this.addAnim( 'drainMeleeTarget', 1, [14], true );
 		this.addAnim( 'drainRangeRange', 1, [11], true );
-		this.addAnim( 'drainRangeTarget', 1, [12], true );
+		this.addAnim( 'drainRangeTarget', 1, [14], true );
 		this.addAnim( 'supportMeleeRange', 1, [13], true );
 		this.addAnim( 'supportMeleeTarget', 1, [14], true );
 		this.addAnim( 'supportRangeRange', 1, [16], true );

@@ -11,6 +11,14 @@
 		var terminalSize = "regular";
 		var buyCards = false;
 		
+		//Make Store Terminal Visible if On Store Page
+		if (redCoinStore){
+			var storeTerminal = document.getElementById("terminal-div-04");
+			storeTerminal.className = "terminal space shadow";
+			var otherTerminal = document.getElementById("terminal-div");
+			otherTerminal.className += " displayNone";
+		}
+		
 		function setTerminalTxt(walletStatus){//Sets initial terminal text
 
 			buyCards = document.getElementById("buyCardsField").value;
@@ -308,15 +316,23 @@
 			}			
 			
 			var myButtons = null;
-			
 			//Default is to send commands, but sometimes the terminal doesn't accept commands so have a second mode that just calls functions
 			var installWalletButton = "<div class='cPanel-button'><button class='button' id='installWallet' onclick='sendCommand(\"install wallet\", 125,1)'>Install Wallet</button></div>";
 			var connectWalletButton = "<div class='cPanel-button'><button class='button' id='connectWalletButton' onclick='sendCommand(\"connect wallet\", 125,1)'>Connect Wallet</button></div>";
 			var signInButton = "<div class='cPanel-button'><button class='button' id='signInButton' onclick='sendCommand(\"sign in\", 125,1)'>Sign In</button></div>";
+			/*
 			var buildDeckButton = "<div class='cPanel-button'><button class='button' id='buildDeckButton' onclick='sendCommand(\"build deck\", 125,1)'>Build Deck</button></div>";
 			var buyCardsButton = "<div class='cPanel-button'><button class='button' id='buyCards' onclick='sendCommand(\"buy cards\", 125,1)'>Buy Cards</button></div>";
-			var playGameButton = "<div class='cPanel-button'><button class='button' id='playGameButton' onclick='sendCommand(\"play game\", 125,1)'>Play Game</button></div>";
+			var redCoinShopButton = `<div class='cPanel-button'><button class='button' id='redCoinShop' onclick="openSameTab('/red-coin-shop/')">RedCoin Shop</button></div>`;
+			*/
+			//The Other Buttons were cool but it was too much prompting and reading I think. This way they can go right where they click.
+			var buildDeckButton = `<div class='cPanel-button'><button class='button' id='buildDeckButton' onclick='openSameTab("https://happyfunkillclub.com/?buildDeck=true&skipPrompt=true")'>Build Deck</button></div>`;
+			var buyCardsButton = `<div class='cPanel-button'><button class='button' id='buyCards' onclick='openSameTab("https://happyfunkillclub.com/?buyCards=true&skipPrompt=true")'>Buy Cards</button></div>`;
+			var redCoinShopButton = `<div class='cPanel-button'><button class='button' id='redCoinShop' onclick='openSameTab("https://happyfunkillclub.com/?redCoinStore=true&skipPrompt=true")'>RedCoin Shop</button></div>`;
+			
+			
 			var logOutButton = "<div class='cPanel-button'><button class='button' id='logOutButton' onclick='sendCommand(\"log out\", 125,1)'>Log Out</button></div>";
+			var playGameButton = "<div class='cPanel-button'><button class='button' id='playGameButton' onclick='sendCommand(\"play game\", 125,1)'>Play Game</button></div>";
 			
 			if (mode == 2){
 				installWalletButton = "<div class='cPanel-button'><button class='button' id='installWallet' onclick='openNewTab(\"https://metamask.io/download/\")'>Install Wallet</button></div>";
@@ -327,33 +343,42 @@
 				playGameButton = "<div class='cPanel-button'><button class='button' id='playGameButton' onclick='playGame()'>Play Game</button></div>";
 			}
 			
-			//Alter BUY CARDS BUTTON IF ON BUY CARDS PAGE
-			if (buyCards){
-				buyCardsButton = "<div class='cPanel-button'><button class='button' id='buyCards' onclick='sendCommand(\"yes\", 100,1)'>Buy Cards</button></div>";
-				if (mode == 2){
-					buyCardsButton = "";
-				}
-			}
-			//Alter BUILD DECK Button if on that page
-			if (deckBuilderMode){
-				buildDeckButton = "<div class='cPanel-button'><button class='button' id='buildDeckButton' onclick='sendCommand(\"yes\", 100,1)'>Build Deck</button></div>";
-			}
-			
 			if (myWalletStatus == 0){
-				myButtons = installWalletButton + playGameButton + buildDeckButton + buyCardsButton;
+				myButtons = installWalletButton + playGameButton;
 			}
 			else if (myWalletStatus == 1){
-				myButtons = connectWalletButton + playGameButton + buildDeckButton + buyCardsButton;
+				myButtons = connectWalletButton + playGameButton;
 			}
 			else if (myWalletStatus == 2){
-				myButtons = signInButton + playGameButton + buildDeckButton + buyCardsButton;
-				//Wallet is connected. User is verified.
 				if (signedInToServerAs != "false"){
-					myButtons = playGameButton + buildDeckButton + buyCardsButton + logOutButton;
+					myButtons = playGameButton;
+				}
+				else{
+					myButtons = signInButton + playGameButton;
 				}
 			}
 			else{
-				myButtons = connectWalletButton + playGameButton + buildDeckButton + buyCardsButton;
+				myButtons = connectWalletButton + playGameButton;
+			}
+			//ADD MORE BUTTONS
+			//BUY CARDS PAGE
+			if (buyCards){
+				 myButtons += buildDeckButton + redCoinShopButton;
+			}
+			//BUILD DECK PAGE
+			else if (deckBuilderMode){
+				myButtons += buyCardsButton + redCoinShopButton;
+			}
+			//RedCoinStore
+			else if (redCoinStore){
+				myButtons += buildDeckButton + buyCardsButton;
+			}
+			else{
+				myButtons += buildDeckButton + buyCardsButton + redCoinShopButton;
+			}
+			//Wallet is connected. User is verified.
+			if (signedInToServerAs != "false"){
+				myButtons += logOutButton;
 			}
 			document.getElementById("cpanel-buttons-div").innerHTML = myButtons;
 			setTimeout(focusOnTerminal, 1000);

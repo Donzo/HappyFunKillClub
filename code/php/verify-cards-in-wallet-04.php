@@ -88,16 +88,13 @@
 			}
 
 			$stmt->execute();
-			$my_Db_Connection = NULL;
 			echo json_encode(['success' => 'Cards updated successfully']);
 		}
 		else{
-			$my_Db_Connection = NULL;
 			echo json_encode(['error' => 'No cards to update']);
 		}
 	}
 	catch (PDOException $e) {
-		$my_Db_Connection = NULL;
 		echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
 	}
 	//Output the final counts

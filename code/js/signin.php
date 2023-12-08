@@ -234,8 +234,20 @@
 					}
 				}
 				else{
-					var cTxt = `You must sign in to verify that you control this wallet. Would you like to sign in now?`;
-					setConfirmation(cTxt, 4, 3);
+					if (inGame){
+						var cTxt = `You must sign in to verify that you control this wallet. Would you like to sign in now?`;
+						setConfirmation(cTxt, 4, 3);
+					}
+					else{
+						let text;
+						if (confirm("You have to sign in to the server to buy or open PACKS. Would you like to sign in now?") == true) {
+							text = "Signing in...";
+							signIn();
+						}
+						else{
+							text = "Ok but you have to sign in to buy or open packs.";
+						}	
+					}
 				}
 			}	
   			else{

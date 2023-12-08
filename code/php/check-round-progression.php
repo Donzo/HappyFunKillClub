@@ -1,8 +1,14 @@
 <?php
 	session_start();
+	
+	
 
 	header('Content-Type: application/json');
 	
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+
 	if (!isset($_SESSION['account'])){
 		echo json_encode(['error' => 'User not in session', 'success' => false]);
 		exit;
@@ -74,33 +80,29 @@
 				}
 			}
 			else {
-				if ($gameData['roundNumber'] > $_SESSION['roundNumber'] ){
-					echo json_encode(['success' => true, 'message' => 'Other player has advanced the round.']);
-					$_SESSION['roundNumber'] = $gameData['roundNumber'];
-				}
-				else{
-					if ($currentTime > $_SESSION['nextRoundEnd']){
-						echo json_encode(['success' => true, 'message' => 'Out of time. Round Processed.']);
-					}
-					else{
-						
-						//Convert strings to DateTime objects
-						$nextRoundEndDateTime = new DateTime($nextRoundEnd);
-						$currentTimeDateTime = new DateTime($currentTime);
-
-						//Calculate the difference
-						$interval = $nextRoundEndDateTime->getTimestamp() - $currentTimeDateTime->getTimestamp();
-						
-
-						echo json_encode(['success' => true, 'message' => 'Round in progress...', 'serverTimeRemaining' => $interval, 'roundNumber' => $gameData['roundNumber'] ]);
-						//Return round time and correct the players clock...
-					}
-				}
 				
+				if ($currentTime > $_SESSION['nextRoundEnd']){
+					echo json_encode(['success' => true, 'message' => 'Out of time. Round Processed.']);
+				}
+				/*else if ($gameData['roundNumber'] > $_SESSION['roundNumber'] ){
+					echo json_encode(['success' => true, 'message' => 'Other player has advanced the round.','valuesUpdated' => $gameData['valuesUpdated']]);
+					$_SESSION['roundNumber'] = $gameData['roundNumber'];
+				}*/
+				else{
+					//Convert strings to DateTime objects
+					$nextRoundEndDateTime = new DateTime($nextRoundEnd);
+					$currentTimeDateTime = new DateTime($currentTime);
+					//Calculate the difference
+					$interval = $nextRoundEndDateTime->getTimestamp() - $currentTimeDateTime->getTimestamp();
+					echo json_encode(['success' => true, 'message' => 'Round in progress...', 'serverTimeRemaining' => $interval, 'roundNumber' => $gameData['roundNumber'] ]);
+					//Return round time and correct the players clock...
+				}
+				$my_Db_Connection = NULL;
 			}
 		}
 		else {
 			echo json_encode(['error' => 'Game not found', 'success' => false]);
+			$my_Db_Connection = NULL;
 		}
 	}
 	catch(PDOException $e){

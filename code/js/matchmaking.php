@@ -211,7 +211,6 @@
 					const data = await response.json();
 
 					if (data.success){
-						console.log(data.p1CardDetails, data.p2CardDetails);
 						gameIsSettingUp = true; //Set this flag to ensure the function isn't called again
 					}
 					else {

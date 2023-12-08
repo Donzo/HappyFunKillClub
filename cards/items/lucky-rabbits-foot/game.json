@@ -1,0 +1,14 @@
+{
+	"name": "Lucky Rabbit's Foot",
+	"dir": "/cards/items/lucky-rabbits-foot/",
+	"cardNumber": "154",
+	"cardType": "Item Card",
+	"class": "Magical Accessory",
+	"rarity": "Gold",
+	"effect": [{
+		"name": "Wear",
+		"type": "Boost",
+		"trait": "luck",
+		"effect": "15"
+	}]
+}

@@ -1,0 +1,14 @@
+{
+	"name": "Advanced Assisted Optics",
+	"dir": "/cards/items/advanced-assisted-optics/",
+	"cardNumber": "153",
+	"cardType": "Item Card",
+	"class": "Sighting Device",
+	"rarity": "Diamond",
+	"effect": [{
+		"name": "Wear",
+		"type": "Boost",
+		"trait": "aim",
+		"effect": "30"
+	}]
+}

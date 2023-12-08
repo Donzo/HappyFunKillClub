@@ -1,0 +1,16 @@
+{
+	"name": "Scroll of Limited Darkness",
+	"dir": "/cards/items/scroll-of-limited-darkness/",
+	"cardNumber": "155",
+	"cardType": "Item Card",
+	"class": "Magic Spell",
+	"rarity": "Platinum",
+	"effect": [{
+		"name": "Cast",
+		"type": "R Drain",
+		"trait": "aim",
+		"element": "dark",
+		"target": "all",
+		"effect": "15"
+	}]
+}

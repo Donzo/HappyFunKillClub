@@ -1,0 +1,32 @@
+{
+    "name": "Advanced Assisted Optics | Happy Fun Kill Club Series 1",
+    "description": "Platinum level medical care for use in the Happy Fun Kill Club game.",
+    "external_url": "https://happyfunkillclub.com/",
+    "image": "https://happyfunkillclub.com/cards/items/advanced-assisted-optics/card.png",
+    "attributes": [
+        {
+            "trait_type": "Card Name",
+            "value": "Advanced Assisted Optics"
+        },
+        {
+            "trait_type": "Card Number",
+            "value": "153"
+        },
+        {
+            "trait_type": "Card Type",
+            "value": "Item Card"
+        },
+        {
+            "trait_type": "Rarity",
+            "value": "Platinum"
+        },
+        {
+            "trait_type": "Aim",
+            "value": 30
+        },
+        {
+            "trait_type": "Item Description",
+            "value": "AI assisted advanced optical targeting device, perfect for when you can’t afford to miss a shot."
+        }
+    ]
+}
