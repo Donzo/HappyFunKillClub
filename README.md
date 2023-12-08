@@ -1,10 +1,11 @@
-# Happy Fun Kill Club ![Logo](https://happyfunkillclub.com/images/banner.jpg)
+![Logo](https://happyfunkillclub.com/images/banner.jpg)
+# Happy Fun Kill Club
 
 Happy Fun Kill Club is an engaging 2-player, turn-based card game set in a vibrant, futuristic world. It's accessible to anyone with a hot wallet like MetaMask and offers fast-paced, strategic gameplay.
 
 # PACKS Tokens
 
-Players who enjoy the game may [purchase PACKS tokens](https://happyfunkillclub.com/?buyCards=true&skipPrompt=true), which can be spent to MINT NFT cards of varying rarity determined by the results of a Chainlink VRF request. 
+All players who sign-in to the server receive a starter deck and can play right away. Players who enjoy the game may [purchase PACKS tokens](https://happyfunkillclub.com/?buyCards=true&skipPrompt=true), which can be spent to MINT NFT cards of varying rarity determined by the results of a Chainlink VRF request. 
 
 These NFT cards can be used [in the game](https://happyfunkillclub.com/game/). But no player is required to purchase any cards to play. All players who sign in to the server receive a starter deck.
 
