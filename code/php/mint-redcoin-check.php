@@ -5,7 +5,7 @@
 	
 	//Check if wallet and token are provided
 	if (isset($_GET['wallet']) && isset($_GET['tkn'])) {
-	/*
+	
 		//Validate Address
 		if (!preg_match('/^0x[a-fA-F0-9]{40}$/', $_GET['wallet'])) {
 			die('Invalid wallet address format.');
@@ -14,7 +14,7 @@
 		if (strlen($_GET['tkn']) > 24) { 
 			die('Invalid token format.');
 		}
-	*/
+	
 		$walletAddress = $_GET['wallet'];
 		$userToken = $_GET['tkn'];
 
@@ -38,15 +38,6 @@
 		$response = json_encode(['redCoins' => $redCoins]);
 		echo $response;
 		
-		/*/Return the redCoins value as JSON
-		$resetStmt = $my_Db_Connection->prepare("UPDATE users SET coinsMinted = TRUE WHERE account = :wallet");
-		$resetStmt->bindParam(':wallet', $walletAddress);
-		$resetStmt->bindParam(':token', $token);
-		$resetStmt->execute();
-		*/
-
-		
-		//$stmt2 = $my_Db_Connection->prepare("UPDATE users SET coinsMinted = 1 WHERE account = :wallet AND tkn = :token"); 	
 		$stmt2 = $my_Db_Connection->prepare("UPDATE users SET mintRequests = mintRequests + 1 WHERE account = :wallet AND tkn = :token");
 		$stmt2->bindParam(':wallet', $walletAddress);
 		$stmt2->bindParam(':token', $userToken);
