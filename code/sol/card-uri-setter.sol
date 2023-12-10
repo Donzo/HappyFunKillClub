@@ -2,7 +2,11 @@
 pragma solidity ^0.8.9;
 
 contract HFKCCardURISetter{
-	
+
+	//These values are all kind of arbitrary right now.
+	//When the full set of cards has been created,
+	//I will thoughtfully adjust the likelihood of each card appearing.	
+
 	function setURI(uint256 _ranNumber) public pure returns (string memory){
 		string memory URL;
         if (_ranNumber < 10){
