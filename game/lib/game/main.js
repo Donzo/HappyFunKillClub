@@ -104,7 +104,7 @@ MyGame = ig.Game.extend({
 	CCIDCounter: 0,
 	MUIDCounter: 0,
 	
-	enemyRecoveryTime: .66,
+	playerWon: false,
 	
 	fadeColor: this.color3,
 	slideColor: this.color3,
@@ -346,7 +346,7 @@ MyGame = ig.Game.extend({
 		if (this.menuScreen){
 			this.drawMenuScreen();	
 		}
-		if (this.gameActive && !ig.game.turnEnded && !ig.game.turnReporting && !ig.game.playerWon){
+		if (this.gameActive && !ig.game.turnEnded && !ig.game.turnReporting && !ig.game.playerWon && !ig.game.readyToEnd){
 			this.drawCharacterCardButton();
 			this.drawEndTurnButton();
 		}
@@ -365,10 +365,10 @@ MyGame = ig.Game.extend({
 			this.drawOpenButtonMenu();
 		}
 		//Turn Ended Screen		
-		if (ig.game.turnEnded && !ig.game.playerWon){
+		if (ig.game.turnEnded && !ig.game.playerWon && !ig.game.readyToEnd){
 			this.drawTurnEndedScreen();
 		}
-		if (ig.game.turnReporting && !ig.game.playerWon){
+		if (ig.game.turnReporting && !ig.game.playerWon && !ig.game.readyToEnd){
 			this.drawTurnReportingScreen();
 			if (ig.game.turnEnded){
 				ig.game.turnEnded = false;
@@ -376,7 +376,7 @@ MyGame = ig.Game.extend({
 			}
 		}
 		//Game over
-		if (ig.game.playerWon){
+		if (ig.game.playerWon || ig.game.readyToEnd){
 			this.drawGameOverScreen();
 		}
 		//Transition ETC.
@@ -609,10 +609,12 @@ MyGame = ig.Game.extend({
 		if (ig.game.turnReporting){
 			myTxt = "Time Left: (reporting)";
 		}
-		if ( ig.game.timeLeftInTurn.delta() > -10){
-		
+		if (ig.game.playerWon || ig.game.readyToEnd){
+			myTxt = "Time Left: GAME OVER";
 		}
+		
 		ctx.fillStyle = ig.game.timeLeftInTurn.delta() > -15 ? "#FFD700" : "#FFFFFF";
+		
 		if ( ig.game.timeLeftInTurn.delta() > -7){
 			ctx.fillStyle = "#FF69B4";
 		}
@@ -1345,7 +1347,7 @@ MyGame = ig.Game.extend({
 				var dataObjectName = `p${player}C${character}data`;
 				var characterData = ig.game[dataObjectName];
 				if (characterData && characterData.location !== undefined) {
-					// Convert location to an integer before pushing
+					//Convert location to an integer before pushing
 					locations.push(parseInt(characterData.location));
 				}
 			}
@@ -1387,27 +1389,40 @@ MyGame = ig.Game.extend({
 		return playerLoc;
 	},
 	deselectPlayerOccupiedTiles: function(tile, player, initialOccupiedTiles = []) {
-		// Convert tile to an integer if it's a string
+		//Convert tile to an integer if it's a string
 		var tileNumber = parseInt(tile, 10);
 
-		// Get all adjacent tiles as integers
-		var adjacentTiles = ig.game.getAdjacentTiles(tileNumber).map(t => parseInt(t, 10));
+		//Get all adjacent tiles as integers
+		var adjacentTiles = ig.game.getAdjacentTiles(tileNumber);
+		if (!Array.isArray(adjacentTiles)) {
+			console.error('Invalid adjacent tiles for tile number:', tileNumber);
+			return; //Exit the function if adjacentTiles is not an array
+		}
+		adjacentTiles = adjacentTiles.map(t => parseInt(t, 10));
 
-		// Get adjacent tiles that are occupied by the player
+		//Get adjacent tiles that are occupied by the player
 		var playerCharacterInfo = ig.game.getAdjacentPlayerLocations(player, tileNumber);
 
-		// Extract only the location numbers as integers from playerCharacterInfo
+		//Ensure playerCharacterInfo is an array
+		if (!Array.isArray(playerCharacterInfo)) {
+			console.error('Invalid player character info for player:', player, 'and tile:', tileNumber);
+			return; //Exit the function if playerCharacterInfo is not an array
+		}
+
+		//Extract only the location numbers as integers from playerCharacterInfo
 		var playerOccupiedTiles = playerCharacterInfo.map(info => parseInt(info.location, 10));
 
-		// Combine playerOccupiedTiles and initialOccupiedTiles
+		//Combine playerOccupiedTiles and initialOccupiedTiles
 		var allOccupiedTiles = [...new Set([...playerOccupiedTiles, ...initialOccupiedTiles])];
-		// Clear colors for tiles that are both adjacent and occupied
+
+		//Clear colors for tiles that are both adjacent and occupied
 		allOccupiedTiles.forEach(occupiedTile => {
 			if (adjacentTiles.includes(occupiedTile)) {
 				ig.game.clearOneTileColor(occupiedTile);
 			}
 		});
 	},
+
 	deselectAllSquares: function(){
 		for (var i = 1; i <= 11; i++){
 			var tileName = "tn" + i;

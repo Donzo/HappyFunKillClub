@@ -39,7 +39,7 @@ contract HappyFunKillClubItemMinter is ERC721, ERC721Enumerable, ERC721URIStorag
 	string nextItem2URI = "https://happyfunkillclub.com/cards/items/intermediate-first-aid-kit/nft.json";
 	string nextItem3URI = "https://happyfunkillclub.com/cards/items/potion-of-regeneration/nft.json";
 	
-	constructor() ERC721("Happy Fun Kill Club Test NFT Items - HFKCTst02", "HFKCT02") {
+	constructor() ERC721("Happy Fun Kill Club Test NFT Items - HFKCTst03", "HFKCT03") {
 		nextTokenId = 1;
 		item1Cost = 10000000000000000000;
 		item2Cost = 25000000000000000000;
@@ -83,12 +83,25 @@ contract HappyFunKillClubItemMinter is ERC721, ERC721Enumerable, ERC721URIStorag
 	function changeNextItem3URI(string memory _nextItem3URI) public onlyOwner {
 		nextItem3URI = _nextItem3URI;
 	}
-	//Chainlink Upkeep Calls This Function To Update The Items In RedCoin Store:
-	/*
-	//View The Redcoin Store Here:
-	https://happyfunkillclub.com/?redCoinStore=true&skipPrompt=true
-	*/
-	
+	function changeNextItem1Cost(uint256 _item1Cost) public onlyOwner {
+		nextItem1Cost = _item1Cost;
+	}
+	function changeNextItem2Cost(uint256 _item2Cost) public onlyOwner {
+		nextItem2Cost = _item2Cost;
+	}
+	function changeNextItem3Cost(uint256 _item3Cost) public onlyOwner {
+		nextItem3Cost = _item3Cost;
+	}
+
+	function changeAllNextItemParameters(string memory _nextItem1URI, string memory _nextItem2URI,string memory _nextItem3URI, uint256 _item1Cost, uint256 _item2Cost, uint256 _item3Cost ) public onlyOwner{
+		changeNextItem1URI(_nextItem1URI);
+		changeNextItem2URI(_nextItem2URI);
+		changeNextItem3URI(_nextItem3URI);
+		changeNextItem1Cost(_item1Cost);
+		changeNextItem2Cost(_item2Cost);
+		changeNextItem3Cost(_item3Cost);
+	}
+
 	function setNewItemURIs() public{
 		//This function will be called by Chainlink Automation.
 		require(msg.sender == CLUpkeepAddress, "Only Chainlink Upkeep Contract Can Call This Function.");

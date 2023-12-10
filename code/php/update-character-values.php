@@ -7,7 +7,6 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 	
-	
 	if (!isset($_SESSION['account'])){
 		echo json_encode(['error' => 'User not in session', 'success' => false]);
 		exit;
@@ -77,6 +76,9 @@
 								break;
 							}
 						}
+						
+
+						
 						break; //Stop after deploying one character
 					}
 				}
@@ -97,8 +99,13 @@
 		$p2Result = updateCharacterLocations($p2Moves, $gameID, 'p2', $my_Db_Connection, $currentLocations);
 
 		//Combine the summaries and simple move records from both players
-		$allMoveSummaries = array_merge($p1Result['summaries'], $p2Result['summaries']);
-		$allSimpleMoveRecords = array_merge($p1Result['simpleSummaries'], $p2Result['simpleSummaries']);
+		//Combine the summaries and simple move records from both players
+		$allMoveSummaries = array_merge($p1Result['summaries'] ?? [], $p2Result['summaries'] ?? []);
+		$allSimpleMoveRecords = array_merge($p1Result['simpleSummaries'] ?? [], $p2Result['simpleSummaries'] ?? []);
+
+		
+		//$allMoveSummaries = array_merge($p1Result['summaries'], $p2Result['summaries']);
+		//$allSimpleMoveRecords = array_merge($p1Result['simpleSummaries'], $p2Result['simpleSummaries']);
 
 		$encodedMoveSummaries = json_encode($allMoveSummaries);
 		$encodedSimpleMoveRecords = json_encode($allSimpleMoveRecords);
@@ -151,7 +158,14 @@
 				$currentLocation = $characterInfo['location'];
 				$cardName = $characterInfo['card_name'];
 				$characterId = $characterInfo['character_id']; //Retrieve the character_id
-
+				
+				//Run some additional checks to make sure dead guys end up in the right locations.
+				if ($characterInfo['health'] <= 0){
+					$characterInfo['location'] = 86;
+				}
+				if ($characterInfo['location'] == 86){
+					$characterInfo['health'] = 0;
+				}
 				//Update the character data
 				$properMove = $characterInfo['location'] == 86 ? $characterInfo['location'] : $move['location'];
 				

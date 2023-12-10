@@ -26,7 +26,7 @@
 				.then(response => {
 					//Ensure the response is valid before proceeding
 					if (!response.ok){
-						throw new Error("Network response was not ok");
+						throw new Error("Network response was not ok 1");
 					}
 					return response.json();
 				})
@@ -70,7 +70,7 @@
 			return fetch('/code/php/waiting-room-add-me.php')
 				.then(response => {
 					if (!response.ok){
-						throw new Error("Network response was not ok");
+						throw new Error("Network response was not ok 2");
 					}
 					//Success!
 					ig.game.menuScreenNum = 2;
@@ -171,7 +171,7 @@
 			fetch('/code/php/check-match-status.php')
 				.then(response => {
 					if (!response.ok){
-						throw new Error("Network response was not ok");
+						throw new Error("Network response was not ok 3");
 					}
 					return response.json();
 				})

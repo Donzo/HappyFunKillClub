@@ -25,7 +25,7 @@
 		
 		var redCoinTokenAddress = '0x4E78Ca0D3B4dcd9b030F61B58BaC521b901545f5';
 		var redCoinMintingContractAddress = '0xFc47A741D4ba3AC0c25b74bE46c121621947fae7'; //Uses Chainlink Functions
-		var itemMintingContractAddress = '0xbbc65DAef7973ca210C1BB36AB164e62832c8a0f';
+		var itemMintingContractAddress = '0xfeB47D1FD7593E1764B1CD7bACAAf09526Aa4917';
 		var clSubscriptionID = 1569;
 		var clFunctionArgs = [];
 		
@@ -39,7 +39,9 @@
 		async function mintRedCoins(){
 			clFunctionArgs.length = 0;
 			var tkn = window.userToken.toString();
+			console.log('tkn = ' + tkn);
 			var accountStr = window['userAccountNumber'].toString();
+			console.log('accountStr = ' + accountStr);
 			clFunctionArgs.push(accountStr);
 			clFunctionArgs.push(tkn);
 			//console.log(clFunctionArgs);
@@ -102,11 +104,11 @@
 			var ttx1 = `Chainlink Functions Request #${trimmedID} Received.`;
 			setTitleTxt(ttx1);
 			
-			var timeout1 = setTimeout(setTitleTxt, 3000, `Minting ${redCoinsToMint} RedCoins...`);
-			var timeout2 = setTimeout(setTitleTxt, 7000, `Success! RedCoins Minted.`);
-			var timeout2b = setTimeout(fetchUserRedCoinsAndToken, 7000);
+			var timeout1 = setTimeout(setTitleTxt, 8000, `Minting ${window.userRedCoins} RedCoins...`);
+			var timeout2 = setTimeout(setTitleTxt, 15000, `Success! RedCoins Minted.`);
+			var timeout2b = setTimeout(fetchUserRedCoinsAndToken, 21000);
 			
-			var timeout3 = setTimeout(setTitleTxt, 10000, "Welcome to the Happy Fun Kill Club!");
+			var timeout3 = setTimeout(setTitleTxt, 21000, "Welcome to the Happy Fun Kill Club!");
 			
 			contract.events.Response({
 				filter: {requestId: myRequestID}, 

@@ -69,6 +69,20 @@
 			$responseMessage = 'New round started';
 			$_SESSION['nextRoundEnd'] = $nextRoundEnd;
 			
+			/*
+			
+			//Store the summaries in the games table
+		$updateSummariesSql = "UPDATE games SET moveSummariesJSON = :moveSummaries, simpleMoveSummariesJSON = :simpleMoveSummaries, actionSummariesJSON = :actionSummaries, simpleActionSummariesJSON = :simpleActionSummaries WHERE game_id = :gameID";
+		$updateSummariesStmt = $my_Db_Connection->prepare($updateSummariesSql);
+		$updateSummariesStmt->bindParam(':moveSummaries', $encodedMoveSummaries, PDO::PARAM_STR);
+		$updateSummariesStmt->bindParam(':simpleMoveSummaries', $encodedSimpleMoveRecords, PDO::PARAM_STR);
+		$updateSummariesStmt->bindParam(':actionSummaries', $encodedActionSummaries, PDO::PARAM_STR);
+		$updateSummariesStmt->bindParam(':simpleActionSummaries', $encodedSimpleActionSummaries, PDO::PARAM_STR);
+		$updateSummariesStmt->bindParam(':gameID', $gameID, PDO::PARAM_INT);
+		$updateSummariesStmt->execute();
+		
+		*/
+			
 		}
 		else{
 			//Match player session round number to current round

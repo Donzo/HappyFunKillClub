@@ -35,14 +35,18 @@
 		foreach ($playerMoves as $move){
 			$characterKey = $move['characterKey'];  //Use characterKey here
 			$newLocation = intval($move['location']);
-
+			
 			$currentLocation = array_column($currentLocations, 'location', 'character_id')[$characterKey] ?? null;
-
+			
+			if ($currentLocation == 86){
+				$newLocation = 86;
+			}
+			
 			if ($currentLocation === null){
 				echo json_encode(['error' => "Character with ID $characterKey not found", 'success' => false]);
 				exit;
 			}
-
+			
 			$validLocations = $currentLocation == 0 ? [0, 4, 8, 1, 5, 9, 3, 7, 11] : getAdjacentTilesAndCurrent($currentLocation);
 			if (!in_array($newLocation, $validLocations)){
 				echo json_encode(['error' => "$errorLogger  Invalid move for character with ID $characterKey who is at $currentLocation", 'success' => false]);

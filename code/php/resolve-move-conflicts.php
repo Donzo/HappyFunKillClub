@@ -6,7 +6,28 @@
 
 	$p1FilteredMoves = array_filter($p1Moves, $filterMoves);
 	$p2FilteredMoves = array_filter($p2Moves, $filterMoves);
-
+	
+	//Function to resolve conflict
+	function resolveConflict($charID1, $charID2){
+		$chStats1 = getCharacterSpeedAndLuckByID($charID1, $currentLocations);
+		$chStats2 = getCharacterSpeedAndLuckByID($charID2, $currentLocations);
+		if (intval($chStats1['speed']) > intval($chStats2['speed'])){
+			return 1;
+		}
+		else if (intval($chStats1['speed']) < intval($chStats2['speed'])){
+			return 2;
+		}
+		else if (intval($chStats1['luck']) > intval($chStats2['luck'])){
+			return 1;
+		}
+		else if (intval($chStats1['luck']) < intval($chStats2['luck'])){
+			return 2;
+		}
+		else{
+			return rand(0, 1) ? 1 : 2; //Randomly choose winner
+		}
+	}
+	
 	//Identify and resolve conflicts
 	$conflicts = [];
 	foreach ($p1FilteredMoves as $p1Index => $p1Move){
@@ -60,18 +81,6 @@
 			}
 		}
 		return null; //Return null if character not found
-	}
-	
-	
-	//Function to resolve conflict
-	function resolveConflict($charID1, $charID2){
-		$chStats1 = getCharacterSpeedAndLuckByID($charID1, $currentLocations);
-		$chStats2 = getCharacterSpeedAndLuckByID($charID2, $currentLocations);
-		if ($chStats1['speed'] > $chStats2['speed']) return 1;
-		if ($chStats1['speed'] < $chStats2['speed']) return 2;
-		if ($chStats1['luck'] > $chStats2['luck']) return 1;
-		if ($chStats1['luck'] < $chStats2['luck']) return 2;
-		return rand(0, 1) ? 1 : 2; //Randomly choose winner
 	}
 	
 	//Function to find the last turn location of a character by characterKey

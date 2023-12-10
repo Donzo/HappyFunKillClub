@@ -1,32 +1,32 @@
 <?php
-	$item1name = "Level 2 Bulletproof Vest";
-	$item1cost = 10;
-	$item1cardLink = "/cards/items/level-2-bulletproof-vest/card.jpg";
+	//$item1name = "Level 2 Bulletproof Vest";
+	//$item1cost = 10;
+	//$item1cardLink = "/cards/items/level-2-bulletproof-vest/card.jpg";
 	
 	
-	$item2name = "Scroll of Limited Darkness";
-	$item2cost = 25;
-	$item2cardLink = "/cards/items/scroll-of-limited-darkness/card.jpg";
+	//$item2name = "Scroll of Limited Darkness";
+	//$item2cost = 25;
+	//$item2cardLink = "/cards/items/scroll-of-limited-darkness/card.jpg";
 	
 	
-	$item3name = "Advanced Assisted Optics";
-	$item3cost = 100;
-	$item3cardLink = "/cards/items/advanced-assisted-optics/card.jpg";
-	
-	//Next Item
-	//$item1name = "Lucky Rabbit's Foot";
-	//$item1cost = 3;
-	//$item1cardLink = "/cards/items/lucky-rabbits-foot/card.jpg";
-	
-	//Next Item
-	//$item2name = "Intermediate First Aid Kit";
-	//$item2cost = 15;
-	//$item2cardLink = "/cards/items/intermediate-first-aid-kit/card.jpg";
-	
-	//Next Item
-	//$item3name = "Potion of Regeneration";
+	//$item3name = "Advanced Assisted Optics";
 	//$item3cost = 100;
-	//$item3cardLink = "/cards/items/potion-of-regeneration/card.jpg";
+	//$item3cardLink = "/cards/items/advanced-assisted-optics/card.jpg";
+	
+	//Next Item
+	$item1name = "Lucky Rabbit's Foot";
+	$item1cost = 3;
+	$item1cardLink = "/cards/items/lucky-rabbits-foot/card.jpg";
+	
+	//Next Item
+	$item2name = "Intermediate First Aid Kit";
+	$item2cost = 15;
+	$item2cardLink = "/cards/items/intermediate-first-aid-kit/card.jpg";
+	
+	//Next Item
+	$item3name = "Potion of Regeneration";
+	$item3cost = 100;
+	$item3cardLink = "/cards/items/potion-of-regeneration/card.jpg";
 ?>
 		<div class="terminal space shadow displayNone" id="terminal-div-04">
 			<div class="top">

@@ -153,9 +153,10 @@ EntityCharacterpiece=ig.Entity.extend({
     	var tileName = "tn"+ this.myTile;
 		var tile = ig.game.getEntityByName(tileName);					
 		if (this.myTile == 86){
-			this.killMe();
+			console.log('my location is 86?')
+			//this.killMe();
 		}
-		if (tile){
+		else if (tile){
 			this.pos.x = tile.pos.x;
 			this.pos.y = tile.pos.y;
 		}
@@ -189,7 +190,7 @@ EntityCharacterpiece=ig.Entity.extend({
 		var pNum = ig.game.playerNumber == "p1" ? 1: 2;
 		var eNum = ig.game.playerNumber == "p2" ? 1: 2;
 		var deployTile = pNum == 1 ? 4 : 8;
-		
+				
 		if (!this.hasMoved){
 			ig.game.clearTileColors();
 			
@@ -413,6 +414,7 @@ EntityCharacterpiece=ig.Entity.extend({
 			this.anims.p2c3chillKill.rewind();
 			this.killMeNow = true;
 			this.killMeTimer.set(2);
+			ig.game[this.mydboVar].health = 0;
 			ig.game[this.mydboVar].location = 86;
 		}
 	},

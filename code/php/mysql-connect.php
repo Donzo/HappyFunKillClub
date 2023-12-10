@@ -1,10 +1,10 @@
 <?php 
 	$my_Db_Connection = NULL;
 	/*DB Credentials*/
-	$database = 'yourDB';
+	$database = 'dbname';
 	$password = '12345';
 	$servername = 'localhost';
-	$username = 'userName';
+	$username = 'user12345';
 	$sql = "mysql:host=$servername;dbname=$database;";
 		
 	$dsn_Options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];

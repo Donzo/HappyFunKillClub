@@ -96,6 +96,44 @@ var abi6 = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_nextItem1URI",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_nextItem2URI",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_nextItem3URI",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_item1Cost",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_item2Cost",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_item3Cost",
+				"type": "uint256"
+			}
+		],
+		"name": "changeAllNextItemParameters",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "_item1Cost",
 				"type": "uint256"
@@ -135,6 +173,19 @@ var abi6 = [
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_item1Cost",
+				"type": "uint256"
+			}
+		],
+		"name": "changeNextItem1Cost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "_nextItem1URI",
 				"type": "string"
@@ -148,12 +199,38 @@ var abi6 = [
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_item2Cost",
+				"type": "uint256"
+			}
+		],
+		"name": "changeNextItem2Cost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "_nextItem2URI",
 				"type": "string"
 			}
 		],
 		"name": "changeNextItem2URI",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_item3Cost",
+				"type": "uint256"
+			}
+		],
+		"name": "changeNextItem3Cost",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

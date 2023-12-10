@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS yourDB;
-USE yourDB;
+CREATE DATABASE IF NOT EXISTS dbs12078668;
+USE dbs12078668;
 CREATE TABLE users(
     account VARCHAR(50) NOT NULL UNIQUE,
     signature  VARCHAR(150) NOT NULL,
@@ -13,6 +13,7 @@ CREATE TABLE users(
     deck2 JSON,
     deck3 JSON,
     redCoins VARCHAR(8) DEFAULT '0',
+	coinsMinted BOOLEAN DEFAULT FALSE,
 	tkn VARCHAR(20),
     PRIMARY KEY (account)
 );

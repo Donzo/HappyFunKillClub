@@ -169,9 +169,7 @@
 			.then(data => {
 				console.log("Round update response:", data);
 				if (data.error == "Game not found"){
-					console.log('looks like the game is over...');
 					postGameEndResults();
-					
 					stopPollingRoundUpdate();
 				}
 				ig.game.lastRoundMoveSummaries = data.simpleMoveSummaries;
@@ -196,7 +194,6 @@
 				
 				ig.game.lastRoundActionSummaries = data.simpleActionSummaries;
 				ig.game.lastRoundActionSummariesLong = data.actionSummaries;
-				//console.log(data.message );
 				if (data.message == "New round started" ||  data.message == "Other player advanced round"){
 					stopPollingRoundUpdate();
 					beginTurn(1);
@@ -242,47 +239,8 @@
 					return true;
 				}
 				else{
-					//No winner yet, game continues
-					ig.game.playerWon = false;
-					checkForGameEndRobust();
 					return false;
 				}
-			}
-		}
-		function checkForGameEndRobust() {
-			var p1Characters = ['p1C1data', 'p1C2data', 'p1C3data'];
-			var p2Characters = ['p2C1data', 'p2C2data', 'p2C3data'];
-
-			var p1LivingCharacters = 0;
-			var p2LivingCharacters = 0;
-
-			//Check if Player 1 characters are alive
-			p1Characters.forEach(identifier => {
-				var characterData = ig.game[identifier];
-				if (characterData && ig.game.getEntityByName(`ch${characterData.character_id}`) || characterData.location == 0) {
-					p1LivingCharacters++;
-				}
-			});
-
-			//Check if Player 2 characters are alive
-			p2Characters.forEach(identifier => {
-				var characterData = ig.game[identifier];
-				if (characterData && ig.game.getEntityByName(`ch${characterData.character_id}`) || characterData.location == 0) {
-					p2LivingCharacters++;
-				}
-			});
-
-			//Determine the game end condition
-			if (p1LivingCharacters === 0 || p2LivingCharacters === 0) {
-				ig.game.playerWon = p1LivingCharacters === 0 ? 2 : 1;
-				console.log('Player has won: ' + ig.game.playerWon);
-				playEndingMusic();
-				postGameEndResults(); 
-				return true;
-			}
-			else{
-				ig.game.playerWon = false;
-				return false;
 			}
 		}
 		function playEndingMusic(){
@@ -305,6 +263,7 @@
 			.then(response => response.json())
 			.then(data => {
 				if (data.message == 'Game already concluded' || data.message == 'Game concluded and rewards updated'){
+					checkForGameEnd();
 					ig.game.playMusicBro(5);
 					ig.game.readyToEnd = true;
 					stopPollingRoundUpdate();
@@ -373,11 +332,9 @@
 		function makeTheActionStatement(actorName, actionName, targetName, trait, effect, result, actionType, targetID, actorID){
 			
 			ig.game.actionReportCount++;
-			console.log(`${ig.game.actionReportCount}: actorName:${actorName}, actionName: ${actionName}, targetName: ${targetName}, trait: ${trait}, effect: ${effect}, result: ${result}, actionType: ${actionType}, targetID: ${targetID}, actorID: ${actorID}`)
+			//console.log(`${ig.game.actionReportCount}: actorName:${actorName}, actionName: ${actionName}, targetName: ${targetName}, trait: ${trait}, effect: ${effect}, result: ${result}, actionType: ${actionType}, targetID: ${targetID}, actorID: ${actorID}`)
 			
-			//1: actorName:Tukkuk Nanook, actionName: Spear Blizzard, targetName: Sir Nibblet Crossfield, trait: health, effect: 0, result: , actionType: Ranged, targetID: 3213, actorID: 3216
 			
-			//Freyja Snowbinder used Glacial Shard on Sierra 'Sightline' Kestrel and decreased health by 40 points.
 			var actionStatement = "";
 			var actionStatement1 = `${actorName} used ${actionName}`;
 			var actionStatementMissed1 = `${actorName} attempted to use ${actionName}`;
@@ -385,7 +342,6 @@
 			
 			
 			var targetHealth = getHealthByCharacterId(targetID);
-			console.log(`${targetName}'s health = ${targetHealth}`)
 			
 			//Result Statements
 			var wasWounded = "was wounded";
@@ -393,10 +349,7 @@
 			var targetKilled = "was killed";
 			var targetAlreadyDead = "was already dead";
 			
-			/*if (trait == "health" && effect >= targetHealth){
-				result = targetKilled;
-			}*/
-			
+
 			ig.game.clearTileColors();
 					
 			//Clear These
@@ -417,7 +370,7 @@
 				targetVarName = "ch" + targetID;
 				targetVarName = targetVarName.replace(/\s/g, "");
 				var targetNameStr = targetVarName.toString();
-				 targetLoc = getLocationByCharacterId(targetID);
+				targetLoc = getLocationByCharacterId(targetID);
 			}
 			
 			//Actor ID
@@ -437,51 +390,13 @@
 			
 			var statusNumName = `sn${actorID}on${targetID}`;
 			
-			if (actionType == "Ranged" && parseInt(effect) > 0 && targetID || actionType == "Melee" && parseInt(effect) > 0 && targetID){
-				applyDamageToCharacterById(targetID, effect);
-			}
+			//if (actionType == "Ranged" && parseInt(effect) > 0 && targetID || actionType == "Melee" && parseInt(effect) > 0 && targetID){
+				//applyDamageToCharacterById(targetID, effect);
+			//}
 			
-			if (result == wasWounded){
-				if (actionType == "Melee"){
-					ig.game.playMeleeHitSound();
-					ig.game.colorTile(actorLoc, 'actor');
-					ig.game.colorTile(targetLoc, 'target');
-				}
-				else if (actionType == "Ranged"){
-					ig.game.playRangedHitSound();
-					ig.game.colorTile(actorLoc, 'actor');
-					ig.game.colorTile(targetLoc, 'target');
-				}
-			}
-			if (result == actorAlreadyDead){
-				//Character attempted to use attack but was killed in action.
-				actionStatement = actionStatementMissed1 + " but was killed in action.";
-				ig.game.playDeadGuyActingSound();
-				ig.game.colorTile(actorLoc, 'target');
-				if (actorNameStr){
-					if (ig.game.getEntityByName(actorNameStr)){
-						var Char = ig.game.getEntityByName(actorNameStr);
-						Char.killMe();
-					}
-				}
-			}
-			else if (result == targetAlreadyDead){
-				//Character used attack was but was already dead.
-				actionStatement = `${actionStatementMissed1} but ${targetName} was already dead.`;
-				ig.game.playMissSound();
-				ig.game.colorTile(actorLoc, 'actor');
-				ig.game.colorTile(targetLoc, 'target');
-				if (targetID){
-					if (ig.game.getEntityByName(targetNameStr)){
-						var Char = ig.game.getEntityByName(targetNameStr);
-						Char.killMe();
-					}
-				}
-			}
-			//actionStatment: Clyde Derringer, Quick Draw, Edmund Arrowfly, health, 9, was killed, Ranged,  3055, 3059
-			else if (result == targetKilled){
+			if (result == targetKilled){
 				//Character used attack on dead character.
-				actionStatement = `${actionStatement1} caused ${effect} damage and killed ${targetName}.`;
+				actionStatement = `${actionStatement1} and caused ${effect} damage and killed ${targetName}.`;
 				ig.game.playKillCharacterSound();
 				ig.game.colorTile(actorLoc, 'actor');
 				ig.game.colorTile(targetLoc, 'target');
@@ -493,7 +408,40 @@
 					}
 				}
 			}
-			
+			else if (result == wasWounded){
+				
+				actionStatement = `${actionStatement1} and caused ${effect} damage, wounding ${targetName}.`;
+				
+				if (actionType == "Melee"){
+					ig.game.playMeleeHitSound();
+					ig.game.colorTile(actorLoc, 'actor');
+					ig.game.colorTile(targetLoc, 'target');
+				}
+				else if (actionType == "Ranged"){
+					ig.game.playRangedHitSound();
+					ig.game.colorTile(actorLoc, 'actor');
+					ig.game.colorTile(targetLoc, 'target');
+				}
+			}
+			else if (result == actorAlreadyDead){
+				//Character attempted to use attack but was killed in action.
+				actionStatement = actionStatementMissed1 + " but was killed in action.";
+				ig.game.playDeadGuyActingSound();
+				ig.game.colorTile(actorLoc, 'target');
+				/*if (actorNameStr){
+					if (ig.game.getEntityByName(actorNameStr)){
+						var Char = ig.game.getEntityByName(actorNameStr);
+						Char.killMe();
+					}
+				}*/
+			}
+			else if (result == targetAlreadyDead){
+				//Character used attack was but was already dead.
+				actionStatement = `${actionStatementMissed1} but ${targetName} was already dead.`;
+				ig.game.playMissSound();
+				ig.game.colorTile(actorLoc, 'actor');
+				ig.game.colorTile(targetLoc, 'target');
+			}
 			else{
 				
 				var theVerb = actionType == "Boost" || actionType == "Support" || actionType == "R Support" ? "increased" : "decreased";
@@ -531,20 +479,10 @@
 					ig.game.colorTile(targetLoc, 'missed');
 				}
 			}
-			//Try to kill again:
-			if (targetID){
-				var targetHealth = getHealthByCharacterId(targetID);
-				//Kill Target Who Has No Health
-				if (ig.game.getEntityByName(targetNameStr) && parseInt(targetHealth) <= 0){
-					var Char = ig.game.getEntityByName(targetNameStr);
-					Char.killMe();
-				}
-			}
 			
 			if (piecePosX && piecePosY){
 				ig.game.spawnEntity( EntityStatuseffectnumbers, piecePosX, piecePosY - 35, {name: statusNumName,theActionType: actionType, theEffect: effect, theTrait: trait, characterID: targetID, myPiecePosX: piecePosX, myPiecePosY: piecePosY });
-			}
-			
+			}			
 			return actionStatement;
 		}
 		
@@ -579,7 +517,7 @@
 				//Handle the first action immediately
 				if (data.simpleActionSummaries.length > 0){
 					var theStatement = makeTheActionStatement(data.actionSummaries[0].actorName, data.actionSummaries[0].actionName, data.actionSummaries[0].targetName, data.actionSummaries[0].trait, data.simpleActionSummaries[0].effect, data.actionSummaries[0].result, data.actionSummaries[0].actionType, data.simpleActionSummaries[0].targetId, data.simpleActionSummaries[0].actorId);
-					console.log(theStatement);
+					console.log("Action Statement 1:" + theStatement);
 					ig.game.centerCameraOnCharacterByID(data.simpleActionSummaries[0].actorId); //Center Camera on Actor
 					ig.game.moveReportingTxt1 = theStatement;
 					ig.game.lastMRTXT1 = theStatement;
@@ -597,19 +535,18 @@
 					if (!ig.game.turnReporting){
 						clearInterval(intervalId);
 						updateMoveReporting(data);
+						
 						checkForGameEnd();
 					}
 					else if (index < data.simpleActionSummaries.length){
-	
 						var theStatement =  makeTheActionStatement(`${data.actionSummaries[index].actorName}`, `${data.actionSummaries[index].actionName}`, `${data.actionSummaries[index].targetName}`, `${data.actionSummaries[index].trait}`, `${data.simpleActionSummaries[index].effect}`,`${data.actionSummaries[index].result}`, `${data.actionSummaries[index].actionType}`, ` ${data.simpleActionSummaries[index].targetId}`, `${data.simpleActionSummaries[index].actorId}`);
-						
+						console.log(`Action Statement[${index}]: ${theStatement}`);
 						ig.game.centerCameraOnCharacterByID(`${data.simpleActionSummaries[index].actorId}`); //Center Camera on Actor
 						ig.game[`moveReportingTxt${index + 1}`] = theStatement;
 						ig.game[`lastMRTXT${index + 1}`] = theStatement;
 
 						index++;
 					}
-					
 					else{
 						clearInterval(intervalId);
 						updateMoveReporting(data);
@@ -650,7 +587,6 @@
 			return { newMoveSummaries, newSimpleMoveSummaries };
 		}
 		function updateMoveReporting(data){
-			
 			//Clear Tile Colors			
 			ig.game.clearTileColors();
 			
@@ -663,7 +599,6 @@
 			ig.game.moveReportingTxt6 = " ";
 
 			if (data.success && data.moveSummaries.length > 0){
-
 				data.moveSummaries = data.moveSummaries.filter(summary => !summary.endsWith("square 0"));
 				data.moveSummaries = data.moveSummaries.filter(summary => !summary.endsWith("square 86"));
 
@@ -672,9 +607,6 @@
 				data.simpleMoveSummaries = data.simpleMoveSummaries.filter(item => item.location != 86);
 				
 				const filteredData = filterMoves(data.moveSummaries, data.simpleMoveSummaries);
-
-				console.log(filteredData.newMoveSummaries);
-				console.log(filteredData.newSimpleMoveSummaries);
 				
 				//These have been filtered for BORING stayed at results.
 				data.moveSummaries = filteredData.newMoveSummaries;
@@ -683,9 +615,6 @@
 				//Now let's filter the DEAD characters:
 				const filteredData2 = filterDeadCharacters(data.moveSummaries, data.simpleMoveSummaries, getHealthByCharacterId);
 
-				console.log(filteredData2.newMoveSummaries);
-				console.log(filteredData2.newSimpleMoveSummaries);
-				
 				data.moveSummaries = filteredData2.newMoveSummaries;
 				data.simpleMoveSummaries = filteredData2.newSimpleMoveSummaries;
 				
@@ -693,9 +622,11 @@
 				
 				
 				//Add the first statement immediately
-				ig.game.moveReportingTxt1 = data.moveSummaries[0] + ".";
-				ig.game.moveReportingTxt1 = changeReportWording(ig.game.moveReportingTxt1, ig.game.lastMRTXT1);
-				ig.game.lastMRTXT1 = ig.game.moveReportingTxt1;
+				if (data.moveSummaries[0]){
+					ig.game.moveReportingTxt1 = data.moveSummaries[0] + ".";
+					ig.game.moveReportingTxt1 = changeReportWording(ig.game.moveReportingTxt1, ig.game.lastMRTXT1);
+					ig.game.lastMRTXT1 = ig.game.moveReportingTxt1;
+				}
 				if (data.simpleMoveSummaries[0]){
 					ig.game.centerCameraOnCharacterByID(data.simpleMoveSummaries[0].characterId); 
 					makeTheMove(data.simpleMoveSummaries[0]);
@@ -892,14 +823,6 @@
 				});
 
 				const result = await response.json();
-				/*
-				if (result.success){
-					console.log('Deck updated successfully in session!');
-				}
-				else{
-					console.error('Failed to update deck in session:', result.message);
-				}
-				*/
 			} 
 			catch (err){
 				console.error('Error while updating deck in session:', err);
@@ -987,8 +910,6 @@
 			ig.game.gameActive = true;
 			ig.game.clearTileColors();
 			synchronizeCharacters();
-			//Try to call it again because what the hell...
-			setTimeout(clearDeadGuysOffTheBoard, 7000);
 		}
 
 		function closeAllOpenWindows(){
@@ -999,26 +920,6 @@
 			ig.game.displayCard = false;
 			ig.game.displayCardView = 1;
 		}
-		
-		function clearDeadGuysOffTheBoard() {
-			var p1Characters = ['p1C1data', 'p1C2data', 'p1C3data'];
-			var p2Characters = ['p2C1data', 'p2C2data', 'p2C3data'];
-
-			//Function to clear dead characters for a given player
-			function clearDeadCharacters(characters) {
-				characters.forEach(characterKey => {
-					var character = ig.game[characterKey];
-					if (character && parseInt(character.health) <= 0) {
-						character.location = 86;
-					}
-				});
-			}
-			//Check and clear dead characters for Player 1
-			clearDeadCharacters(p1Characters);
-			//Check and clear dead characters for Player 2
-			clearDeadCharacters(p2Characters);
-		}
-
 		function initializeGameMoves(){
 			const gameMoves = {
 				gameId: ig.game.currentGameId, 
@@ -1106,12 +1007,37 @@
 					Object.keys(fetchedCharacter).forEach(key => {
 						ig.game[matchingIdentifier][key] = fetchedCharacter[key];
 					});
-
+					
+					
+					
 					//Additionally, find the corresponding game entity and update its properties
-					const theChar = ig.game.getEntityByName(`ch${ig.game[matchingIdentifier].character_id}`);
+					var charName = `ch${ig.game[matchingIdentifier].character_id}`;
+					var theChar = ig.game.getEntityByName(charName);
+					
 					if (theChar){
 						theChar.myTile = parseInt(ig.game[matchingIdentifier].location);
 					}
+					else{
+						if (ig.game[matchingIdentifier].location != 0 && ig.game[matchingIdentifier].location != 86){
+							console.log(charName + ' character is NOT on the board and he is being FORCE DEPLOYED!');
+							//Which Players Piece				
+							var pNum = ig.game[matchingIdentifier].player== "p1" ? 1 : 2;
+						
+							var deploymentTile = pNum == 1 ? 4 : 8;
+							var tileName = "tn" + deploymentTile;
+							var tile = ig.game.getEntityByName(tileName);
+						
+							var charNum = matchingIdentifier.match(/C(\d+)data/);
+							charNum = charNum.slice(-1);
+							charNum = parseInt(charNum);
+						
+							var myOtherPlayer =  ig.game.playerNumber == "p1" && pNum == 1 ? false : true;
+						
+							//Spawn a piece that the computer forced deployment...
+							ig.game.spawnEntity( EntityCharacterpiece, tile.pos.x, tile.pos.y, { player: pNum, characterNum: charNum, myTile: parseInt(ig.game[matchingIdentifier].location), otherPlayer: myOtherPlayer, name: charName});
+						}
+					}
+					
 				}
 			});
 		}

@@ -225,6 +225,10 @@
 		//Calculate and apply the effects of the actions in the order of the sortedActions array
 		foreach ($sortedActions as $action){
 			
+			//Reset These Values
+			$finalEffect = 0;
+			$finalEffectNarrative = "";
+			$damage = 0;
 			
 			$actorStats = getAndUpdateCharacterStats($currentLocations, $action['characterKey']);
 			
@@ -400,7 +404,12 @@
 					break;
 				}
 		
-
+				//Final Death Catch
+				if ($finalEffectNarrative == "was killed"){
+					$targetStats['health'] = 0;
+					$targetStats['location'] = 86;
+				}
+				
 				//Update the target's stats in the $currentLocations array
 				updateCharacterInLocations($currentLocations, $action['target'], $targetStats);
 				
@@ -424,7 +433,7 @@
 				];
 				
 			}
-			else if ($actorStats['location'] == 86 || $actorStats['health'] < 1 ){
+			else if ($actorStats['location'] == 86 || $actorStats['health'] <= 0 ){
 				$finalEffect = 0;
 				//This target was dead by this time.
 				$finalEffectNarrative = "was dead and could not take action";
@@ -444,7 +453,10 @@
 					'actionType' => $actionDetails['type'],
 					'trait' => $actionDetails['trait'],
 					'targetName' => $targetStats['card_name'],
-					'result' => $finalEffectNarrative //Example narrative
+					'result' => $finalEffectNarrative,
+					'actorId' => $action['characterKey'],
+					'targetId' => $action['target'],
+					'effect' => $finalEffect
 				];
 			}
 			//Update the actor's stats in the $currentLocations array
